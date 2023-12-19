@@ -1,0 +1,13 @@
+.block{
+    width: 30vw;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+}
+.block img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}

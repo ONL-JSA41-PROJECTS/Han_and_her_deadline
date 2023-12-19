@@ -1,0 +1,57 @@
+#form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50vw;
+    margin: 25vh auto;
+    font-family: vollkorn;
+    min-height: 50vh;
+    font-size: 30px;
+}
+#form input{
+    cursor: pointer;
+    padding: 5px 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 10px;
+}
+#envelope{
+    z-index: -1;
+    width: 60vw;
+    height: 55vh;
+    position: fixed;
+    margin: 20vh 0 0 20vw;
+}
+#topper{
+    position: absolute;
+    top: 0;
+    left: 2.5%;
+    width: 95%;
+    height: 54%;
+}
+#sign-in-gg{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.transition-all-05s{
+    transition: all 0.5s;
+}
+a:active .transition-all-05s{
+    transform: translateY(10);
+}
+#home{
+    position: fixed;
+    margin: -80px 0 0 725px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    filter: drop-shadow(0 0px 10px white);
+}

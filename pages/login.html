@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id"
+        content="811708426170-9343j3rps64jf7a1etkcb7nut5uted9l.apps.googleusercontent.com">
+    <title>Welcome back!</title>
+    <link rel="stylesheet" href="../cssFiles/colors&fonts.css">
+    <link rel="stylesheet" href="../cssFiles/login&signup.css">
+    <link rel="stylesheet" href="../cssFiles/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+
+<body class="oceanic">
+    <a  id="home" href="../index.html"><span class="material-symbols-outlined">home</span></a>
+
+    <div id="envelope" class="red transition-all-05s">
+        <div id="topper" class="dark"></div>
+    </div>
+    <form action="" id="form" class="yellow transition-all-05s">
+        <div id="sign-in-gg">
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <a href="#" onclick="signOut();">Sign out</a>
+        </div>
+
+        <label for="name">Your nickname: </label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="pass">Your password: </label>
+        <input type="password" name="pass" id="pass" required>
+
+        <label for="remember">Remember me</label>
+        <input type="checkbox" name="remember" id="remember">
+
+        <input type="submit" name="submit" id="submit" value="Log in">
+        <a href="./signup.html">Don't have an account?</a>
+    </form>
+
+    <script src="../jsFiles/checkAccount.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+
+</html>

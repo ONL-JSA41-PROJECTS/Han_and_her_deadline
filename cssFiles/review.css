@@ -1,0 +1,23 @@
+body{
+    padding: 0;
+    margin: 0;
+    
+}
+#product-container{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#product-container img{
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+}
+#container a{
+    color: white;
+    border-radius: 20px;
+    text-decoration: none; 
+    padding: 10px 20px;
+}

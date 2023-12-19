@@ -1,0 +1,118 @@
+
+#welcome{
+    position: relative;
+    width: 700px;
+    height: 300px;
+}
+#welcome img{
+    filter: grayscale(100%);
+    position: absolute;
+    width: 200px;
+}
+#welcome a{
+    font-family: medio;
+    position: absolute;
+    top: 230px;
+    text-decoration: none;
+}
+#pic1{
+    border: 5px solid rgba(255, 255, 255, 0.334);
+    z-index: 1;
+    bottom: -30px;
+    right: -40px;
+}
+#pic2{
+    z-index: 0;
+    bottom: -70px;
+    right: 140px;
+}
+#content{
+    position: absolute;
+    left: 10px;
+    width: 60%;
+    color: rgb(245, 245, 245);
+}
+#content h1{
+    font-size: 100px;
+    font-family: voga;
+}
+#content p{
+    font-size: 10px;
+    font-family: medio;
+}
+#nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    height: 15vh;
+    position: fixed;
+    margin: 40vh 0 0 750px;
+}
+#nav ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style-type: none;
+}
+#nav li{
+    cursor: pointer;
+    font-family: medio;
+    font-weight: bold;
+    font-size: 30px;
+}
+#nav a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+#enter{
+    z-index: 2;
+    position: fixed;
+    margin:  90px 0 0 640px;
+    color: #9A3B31;
+    text-decoration: none;
+    font-size: 200px;
+    font-family: medio;
+}
+.newspaper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: vollkorn;
+    width: 400px;
+    height: 250px;
+    background-color: #E2C799;
+}
+.newspaper h1{
+    font-size: 60px;
+    text-align: center;
+    padding: 20px 10px;
+    border: 3px solid #F2ECBE;
+}
+.newspaper p{
+    visibility: hidden;
+}
+.newspaper img{
+    width: 100%;
+    height: 70%;
+    filter: grayscale(100%);
+}
+#bottom{
+    position: fixed;
+    margin: 100px 0 0 70px;
+}
+#top{
+    z-index: 0;
+    position: fixed;
+    margin: -250px 0 0 970px;
+}
+#login_signup{
+    position: fixed;
+    margin: 50vh 0 0 90vw;
+    text-decoration: none;
+    color: #9A3B31;
+    cursor: pointer;
+    font-family: medio;
+    font-weight: bold
+}
