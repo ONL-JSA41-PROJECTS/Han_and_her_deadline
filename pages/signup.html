@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../cssFiles/colors&fonts.css">
     <link rel="stylesheet" href="../cssFiles/login&signup.css">
     <link rel="stylesheet" href="../cssFiles/signup.css">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 </head>
@@ -21,9 +21,9 @@
     </div>
 
     <form action="" id="form" class="amnesia transition-all-05s">
-        <div id="sign-in-gg">
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
+        <div id="g_id_onload" data-client_id="811708426170-9343j3rps64jf7a1etkcb7nut5uted9l.apps.googleusercontent.com"
+        data-callback="handleCredentialResponse">
+        <div class="g_id_signin" data-type="standard"></div>
 
         <label for="name">Create a nickname: </label>
         <input type="text" name="name" id="name" required>
