@@ -17,6 +17,10 @@ function createItemBlock(){
         let itemPrice = document.createElement("i")
         itemPrice.innerHTML = item.price * 1000 + " vnđ"
         info.appendChild(itemPrice)
+
+        let itemQuantity = document.createElement("p")
+        itemQuantity.innerHTML = "Quantity: " + item.quantity
+        info.appendChild(itemQuantity)
         block.appendChild(info)
 
         // !!! also the last !!!

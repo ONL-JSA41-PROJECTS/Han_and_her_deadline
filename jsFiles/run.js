@@ -31,7 +31,8 @@ function addToReview(i){
         {
             name : products[i].name,
             img: products[i].img,
-            price: products[i].price
+            price: products[i].price,
+            describe: products[i].describe
         }
     localStorage.setItem("userReview",JSON.stringify(userReview))
 }
