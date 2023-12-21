@@ -7,24 +7,36 @@
     <title>More info</title>
     <link rel="stylesheet" href="../cssFiles/review.css">
     <link rel="stylesheet" href="../cssFiles/colors&fonts.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body class="red">
+
+    <div id="alert"><p>Added to Cart</p></div>
+
     <div id="container">
         <div id="product-container" class="yellow"></div>    
         <div id="info">
             <h1 id="name"></h1>
             <hr>
             <p id="describe"></p>
+            <p id="quantity">Current quantity: </p> <br>
             <p id="price"></p>
             <a class="lightOrange" href="" id="btn">Add to Cart</a>
         </div>
+
+        <div id="tools">
+            <a id="cart" class="darkYellow" href="./cart.html">
+                <i>Checkout Cart &ensp;</i> 
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+            </a>
+            <a id="shop" class="darkYellow" href="./shop.html">
+                <i>Back to Shop &ensp;</i> 
+                <span class="material-symbols-outlined">storefront</span>
+            </a>
+        </div>
     </div>
 
-    <div id="tools">
-        <a href="./cart.html">Go to Cart</a>
-        <a href="./shop.html">Go back to Shop</a>
-    </div>
     <script src="../jsFiles/productList.js"></script>
     <script src="../jsFiles/review.js"></script>
 </body>

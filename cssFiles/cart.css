@@ -1,13 +1,91 @@
 .block{
+    position: relative;
     width: 30vw;
     height: 35vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background: whitesmoke;
+}
+.info{
+    font-family: vollkorn;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+}
+.info h1{
+    font-family: athene;
+    font-size: 25px;
+    text-align: center;
+    width: 90%;
+}
+.info hr{
+    width: 30%;
+    border: 2px solid rgb(102, 49, 49);
 }
 .block img{
     width: 200px;
     height: 200px;
     object-fit: cover;
+    border: 8px solid #ad8b51;
+}
+#container{
+    padding-top: 30px;
+    grid-template-columns: auto auto auto;
+    width: 100vw;
+    display: grid;
+    justify-content: space-evenly;
+    gap: 20px 0px;
+}
+.block:hover .remove{
+    opacity: 1;
+}
+.remove{
+    font-family: Arial;
+    cursor: pointer;
+    font-size: 25px;
+    position: absolute;
+    top: 2px;
+    left: 13px;
+    color: rgb(116, 116, 116);
+    opacity: 0;
+    transition: all 0.4s;
+}
+#shop{
+    margin-top: 620px;
+}
+#review{
+    margin-top: 550px;
+}
+#tools a{
+    z-index: 1;
+    position: fixed;
+    margin-left: 93.2vw;
+    width: 100px;
+    height: 60px;
+    font-size: 20px;
+    color: rgb(38, 38, 38);
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: vollkorn;
+    background-color: rgb(234, 230, 215);
+    border-radius: 20px 0px 0px 20px;
+    transition: all 0.3s;
+}
+#tools a i{
+    opacity: 0;
+    width: 0;
+}
+#tools a:hover{
+    width: 200px;
+    margin-left: 87vw;
+}
+#tools a:hover i{
+    width: fit-content;
+    opacity: 0.7;
 }

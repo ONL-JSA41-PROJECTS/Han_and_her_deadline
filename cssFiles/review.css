@@ -37,6 +37,10 @@ body{
     text-decoration: none; 
     width: 180px;
     height: 50px;
+    transition: all 0.3s;
+}
+#info a:hover{
+    background-color: brown;
 }
 #name{
     width: 80%;
@@ -64,11 +68,57 @@ body{
 }
 #describe{
     width: 80%;
-    height: 40%;
+    height: 30%;
     font-size: 100%;
 }
 hr{
     margin: 0px 0 20px 0;
     width: 60%;
     border: 1px solid rgb(47, 47, 47);
+}
+#alert{
+    width: 0px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    margin: 20px 0 0 40vw;
+    background-color: burlywood;
+    font-family: vollkorn;
+    transition: all 0.2s;
+}
+#alert p{
+    opacity: 0;
+}
+#cart{
+    top: 270px;
+}
+#shop{
+    top: 350px;
+}
+#tools a{
+    position: absolute;
+    left: 1208px;
+    border-radius: 0px 20px 20px 0;
+    text-decoration: none;
+    color: rgb(28, 28, 28);
+    width: 50px;
+    height: 70px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#tools a i{
+    opacity: 0;
+    width: 0;
+}
+#tools a:hover{
+    width: 200px;
+}
+#tools a:hover i{
+    width: fit-content;
+    opacity: 0.7;
 }
