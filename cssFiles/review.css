@@ -11,7 +11,7 @@ body{
     height: 100vh;
 }
 #product-container{
-    z-index: 4;
+    z-index: 3;
     position: absolute;
     top: 150px;
     width: 400px;
@@ -48,7 +48,6 @@ body{
     text-align: center;
     display: inline-block;
     font-family: medio;
-    color: rgb(29, 29, 29);
 }
 #info{
     display: flex;
@@ -61,7 +60,6 @@ body{
     position: absolute;
     width: 300px;
     height: 400px;
-    background-color: blanchedalmond;
     color: rgb(85, 80, 80);
     font-family: vollkorn;
     text-align: center;
@@ -92,6 +90,9 @@ hr{
 #alert p{
     opacity: 0;
 }
+#pay{
+    top: 190px;
+}
 #cart{
     top: 270px;
 }
@@ -121,4 +122,59 @@ hr{
 #tools a:hover i{
     width: fit-content;
     opacity: 0.7;
+}
+#more{
+    z-index: -1;
+    position: absolute;
+    top: 230px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 750px;
+    min-height: 250px;
+    font-family: vollkorn;
+}
+#more p{
+    font-size: 110%;
+    text-align:justify;
+    text-align-last: center;
+    width: 65%;
+    padding: 20px 20px 20px 30px ;
+}
+#customer-payment-info{
+    z-index: 5;
+    margin: -500px 0 0 30vw;
+    display: none;
+    filter: drop-shadow(0 0 100px rgba(0, 0, 0, 0.569));
+    position: fixed;
+    font-family: vollkorn;
+    width: 40vw;
+    height: 40vh;
+    background-color: beige;
+}
+#customer-payment-info form{
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+#customer-payment-info input{
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 2px solid rgb(183, 183, 161);
+}
+#customer-payment-info select{
+    border: 2px solid rgb(183, 183, 161);
+    padding: 10px 20px;
+}
+#submit{
+    background-color: darkslategrey;
+    color: white;
+}
+#cancel{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 2px solid rgba(0, 0, 0, 0.397);
 }

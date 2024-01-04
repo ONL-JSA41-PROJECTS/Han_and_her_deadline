@@ -1,4 +1,5 @@
 .block{
+    cursor: pointer;
     position: relative;
     width: 30vw;
     height: 35vh;
@@ -32,7 +33,7 @@
     border: 8px solid #ad8b51;
 }
 #container{
-    padding-top: 30px;
+    padding: 30px 0;
     grid-template-columns: auto auto auto;
     width: 100vw;
     display: grid;
@@ -53,16 +54,20 @@
     opacity: 0;
     transition: all 0.4s;
 }
-#shop{
-    margin-top: 620px;
-}
-#review{
-    margin-top: 550px;
+#tools{
+    z-index: 5;
+    filter: drop-shadow( 0 0 20px black);
+    position: fixed;
+    margin: 60vh 0 0 87vw;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-evenly;
+    height: 220px;
+    width: 200px;
 }
 #tools a{
     z-index: 1;
-    position: fixed;
-    margin-left: 93.2vw;
     width: 100px;
     height: 60px;
     font-size: 20px;

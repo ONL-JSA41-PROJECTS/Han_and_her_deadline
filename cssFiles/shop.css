@@ -51,7 +51,7 @@ body{
     cursor: pointer;
     margin: 30px 100px;
     width: 15%;
-    height: 35vh;
+    height: 230px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +61,6 @@ body{
     width: 200px;
     height: 200px;
     object-fit: cover;
-    transition: all 0.5s;
 }
 .infor{
     opacity: 0;
@@ -70,7 +69,7 @@ body{
     transition: all 1s;
 }
 .infor p{
-    font-size: 30px;
+    font-size: 10px;
     font-weight: bold;
     text-align: center;
     padding: 10px 0;
@@ -94,6 +93,9 @@ body{
 .col:hover .infor{
     opacity: 1;
     width: 50%;
+}
+.col:hover p{
+    font-size: 30px;
 }
 .tag{
     text-decoration: none;

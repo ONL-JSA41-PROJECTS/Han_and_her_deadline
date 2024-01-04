@@ -1,0 +1,105 @@
+body{
+    font-family: vollkorn;
+    background-color: rgb(75, 75, 73);
+}
+#main{
+    width: 100vw;
+    display: flex;
+}
+#list{
+    margin:  0 0 0 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: merchant;
+    width: 30vw;
+    min-height: 70vh;
+    background-color: rgb(247, 247, 243);
+}
+#receipt-info{
+    display: flex;
+    width: 90%;
+}
+.col{
+    line-height: 20px;
+    width: 50%;
+    text-align: start;
+}
+#vouchers{
+    min-width: 17vw;
+    max-width: 25vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: first baseline;
+    align-items: center;
+}
+.voucher{
+    z-index: 2;
+    cursor: pointer;
+    margin: 10px 0;
+    background-size: cover;
+    background-position: center;
+    width: 14vw;
+    height: 17vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.voucher span{
+    position: fixed;
+    margin: -50px 0 0 100px;
+    background-color: black;
+    padding: 5px;
+    color: gold
+}
+.voucher p{
+    filter:  drop-shadow(0 0 20px white);
+    left:100px;
+    text-align: center;
+    width: 100%;
+    backdrop-filter: invert(90%) blur(0.03em);
+    font-size: 160%;
+    font-family: athene;
+    font-weight: bold;
+    color: rgb(51, 37, 37);
+}
+#chosen{
+    display: grid;
+    gap: 20px 40px;
+    grid-template-columns: auto auto auto;
+    width: 80vw;
+    min-height: 100vh;
+}
+#tools a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+td{
+    padding: 5px 0;
+}
+table{
+    width: 90%;
+}
+th{
+    border: 2px solid black;
+}
+#counter{
+    width: 90%;
+}
+#counter span{
+    display: flex;
+    justify-content: space-between;
+}
+#counter hr{
+    width: 100%;
+    margin: 5px 0;
+}
+#list i{
+    line-height: 20px;
+}

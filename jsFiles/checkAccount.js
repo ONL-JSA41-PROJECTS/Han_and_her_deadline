@@ -1,9 +1,9 @@
 const form = document.getElementById("form")
-let userInfo = JSON.parse(localStorage.getItem("userAccount")) || []
+let accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
 
 form.addEventListener("submit",function (e) {
     e.preventDefault()
-    if (JSON.parse(localStorage.getItem("userAccount")) && JSON.parse(localStorage.getItem("userAccount"))[0]) {
+    if (JSON.parse(localStorage.getItem("userAccounts")) && JSON.parse(localStorage.getItem("userAccounts"))[0]) {
         checkInfo()
     }
     else {
@@ -13,16 +13,17 @@ form.addEventListener("submit",function (e) {
 })
 
 function saveInfo(){
-    userInfo[remember]=true
-    localStorage.setItem("userAccount",JSON.stringify(userInfo))
+    accountsList[remember]=true
+    localStorage.setItem("userAccounts",JSON.stringify(accountsList))
 }
 
 function checkInfo(){
-    for(let info of userInfo){
+    for(let info of accountsList){
         if(document.getElementById("name").value == info.name && document.getElementById("pass").value == info.pass){
             if (document.getElementById("remember").checked){
                 saveInfo()
             }
+            localStorage.setItem("currentAccount", JSON.stringify(info))
             window.location.href="../pages/shop.html"
             alert("Hope you have a nice time")
         }
