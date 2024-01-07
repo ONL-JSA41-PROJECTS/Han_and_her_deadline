@@ -55,3 +55,10 @@ a:active .transition-all-05s{
     cursor: pointer;
     filter: drop-shadow(0 0px 10px white);
 }
+#gg-sign-in{
+    margin: 0 0 0 -60%;
+    width: 150%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

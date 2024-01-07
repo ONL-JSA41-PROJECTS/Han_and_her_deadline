@@ -1,9 +1,9 @@
 const form = document.getElementById("form")
-let userInfo = JSON.parse(localStorage.getItem("userAccount")) || []
+let accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
 
 form.addEventListener("submit",function (e) {
     e.preventDefault()
-    if (JSON.parse(localStorage.getItem("userAccount")) && JSON.parse(localStorage.getItem("userAccount"))[0]) {
+    if (JSON.parse(localStorage.getItem("userAccounts")) && JSON.parse(localStorage.getItem("userAccounts"))[0]) {
         checkInfo()
     }
     else {
@@ -13,16 +13,17 @@ form.addEventListener("submit",function (e) {
 })
 
 function saveInfo(){
-    userInfo[remember]=true
-    localStorage.setItem("userAccount",JSON.stringify(userInfo))
+    accountsList[remember]=true
+    localStorage.setItem("userAccounts",JSON.stringify(accountsList))
 }
 
 function checkInfo(){
-    for(let info of userInfo){
+    for(let info of accountsList){
         if(document.getElementById("name").value == info.name && document.getElementById("pass").value == info.pass){
             if (document.getElementById("remember").checked){
                 saveInfo()
             }
+            localStorage.setItem("currentAccount", JSON.stringify(info))
             window.location.href="../pages/shop.html"
             alert("Hope you have a nice time")
         }
@@ -32,18 +33,32 @@ function checkInfo(){
     }
 }
 
-// sign in with gg
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-  }
+// // sign in with gg
 
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
+  function decodeJwtResponse(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+        atob(base64)
+            .split("")
+            .map(function (c) {
+                return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+}
+
+window.handleCredentialResponse = (response) => {
+    // decodeJwtResponse() is a custom function defined by you
+    // to decode the credential response.
+    const responsePayload = decodeJwtResponse(response.credential);
+
+    console.log("ID: " + responsePayload.sub);
+    console.log('Full Name: ' + responsePayload.name);
+    console.log('Given Name: ' + responsePayload.given_name);
+    console.log('Family Name: ' + responsePayload.family_name);
+    console.log("Image URL: " + responsePayload.picture);
+    console.log("Email: " + responsePayload.email);
+}

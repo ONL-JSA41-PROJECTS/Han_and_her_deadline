@@ -6,23 +6,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>More info</title>
     <link rel="stylesheet" href="../cssFiles/review.css">
+    <link rel="shortcut icon" href="../assets/logo.png">
     <link rel="stylesheet" href="../cssFiles/colors&fonts.css">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="red">
-    <div id="container">
-        <div id="product-container" class="yellow">
-        </div>
-        <h1 id="name"></h1>
-        <p id="price"></p>
-        <a class="lightOrange" href="" onclick="addToCart()" id="btn">Add to Cart</a>
+
+    <div id="alert">
+        <p>Added to Cart</p>
     </div>
 
-    <div id="tools">
-        <a href="./cart.html">Go to Cart</a>
-        <a href="./shop.html">Go back to Shop</a>
+    <div id="contact">
+        <a href="../assets/zaloQR.jpg"><img src="../assets/zalo-icon.png" alt=""></a>
+        <a href="https://www.facebook.com/profile.php?id=100089121772118&locale=vi_VN"><img src="../assets/Facebook_Logo_2023.png" alt=""></a>
     </div>
-    <script src="../jsFiles/productList.js"></script>
+
+    <div id="container">
+        <div id="product-container" class="yellow"></div>
+        <div id="info" class="blanchedalmond">
+            <h1 id="name" class="blacktext"></h1>
+            <hr>
+            <p id="describe"></p>
+            <p id="quantity">Current quantity: </p> <br>
+            <p id="price"></p>
+            <a class="lightOrange" href="" id="btn">Add to Cart</a>
+        </div>
+
+        <div id="tools">
+            <a id="pay" class="darkYellow" href="#">
+                <i>Buy now &ensp;</i>
+                <span class="material-symbols-outlined">payments</span>
+            </a>
+            <a id="cart" class="darkYellow" href="./cart.html">
+                <i>Checkout Cart &ensp;</i>
+                <span class="material-symbols-outlined">shopping_cart_checkout</span>
+            </a>
+            <a id="shop" class="darkYellow" href="./shop.html">
+                <i>Back to Shop &ensp;</i>
+                <span class="material-symbols-outlined">storefront</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="more" class="blanchedalmond">
+        <p class="blacktext"></p>
+    </div>
+
+    <div id="customer-payment-info">
+        <form action="" id="form">
+            <div>
+                <label for="address">Your address:</label>
+                <input type="text" placeholder="Address" required>
+            </div>
+
+
+            <label for="pay-method"> Choose your payment method: </label>
+            <select name="pay-method" id="pay-method">
+                <option value="none">None</option>
+                <option value="after-delivered">Pay after your item is delivered</option>
+                <option value="credit-card">Credit card (VNPay)</option>
+            </select>
+
+            <input type="submit" name="" id="submit" value="Deliver now">
+            <button id="cancel">Cancel</button>
+
+        </form>
+    </div>
+
+    <div id="comment">
+        <h2>Rate it!</h2>
+        <form id="rate-form" action="">
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <br>
+
+            <input type="text" placeholder="Comment here">
+            <input type="submit" class="red whiteText" value="Enter">
+        </form>
+        <ul id="rate">
+            <li>See all</li>
+            <li>5 <span class="fa fa-star checked"></span></li>
+            <li>4 <span class="fa fa-star checked"></span></li>
+            <li>3 <span class="fa fa-star checked"></span></li>
+            <li>2 <span class="fa fa-star checked"></span></li>
+            <li>1 <span class="fa fa-star checked"></span></li>
+        </ul>
+    </div>
+
+    <script src="../jsFiles/chatwfb.js"></script>
+    <script src="../datas/productList.js"></script>
+    <script src="../datas/commentList.js"></script>
     <script src="../jsFiles/review.js"></script>
 </body>
 

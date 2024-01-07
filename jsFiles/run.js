@@ -3,10 +3,15 @@ const items = document.querySelectorAll(".col")
 const topper = document.getElementById("topper")
 const search=document.getElementById("search")
 const searchInput=document.getElementById("searchInput")
-
 const home=document.getElementById("home")
+const cart = document.getElementById("cart")
+
+// nav
 home.addEventListener("click",function(){
     window.location.href="../index.html"
+})
+cart.addEventListener("click",function(){
+    window.location.href="./cart.html"
 })
 // other features
 let inReview = false
@@ -31,7 +36,9 @@ function addToReview(i){
         {
             name : products[i].name,
             img: products[i].img,
-            price: products[i].price
+            price: products[i].price,
+            describe: products[i].describe,
+            more: products[i].more
         }
     localStorage.setItem("userReview",JSON.stringify(userReview))
 }
@@ -56,11 +63,9 @@ function searchItem(){
     if(searchInput.value != ""){
         
         for(let item of items){
-            console.log("đâsd")
             if(normalize(item.querySelector("p").innerHTML).includes(normalize(searchInput.value))){
                 try{
                     item.classList.remove("hidden")
-                    console.log(item)
                 }
                 catch{}
             }
