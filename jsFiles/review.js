@@ -18,6 +18,10 @@ const form = document.getElementById("form")
 const cancel = document.getElementById("cancel")
 const payMethod = document.getElementById("pay-method")
 const stars = document.getElementsByClassName("star")
+const input = document.getElementById("input")
+const rateForm = document.getElementById("rate-form")
+const inputFile = document.getElementById("inputfile")
+const rateImgContainer = document.getElementById("rate-img-container")
 let temp = 0
 
 // visible product information
@@ -56,7 +60,7 @@ if (JSON.parse(localStorage.getItem("userAccounts")) && JSON.parse(localStorage.
 }
 
 
-// add to cart
+// ADD TO CART
 btn.addEventListener("click", function (e) {
     e.preventDefault()
 
@@ -101,7 +105,7 @@ btn.addEventListener("click", function (e) {
     }
 })
 
-// buy without adding to cart
+// QUICK PAYMENT (WITHOUT ADDING TO CART)
 pay.addEventListener("click", function () {
     paymentInfo.style.display = "block"
 
@@ -123,7 +127,7 @@ payMethod.addEventListener("change", function () {
     }
 })
 
-// thêm dấu chấm sau mỗi 3 số
+// ADD DOT FOR EVERY 3 UNITS
 function addSpaceForPrice(str) {
     let newstr = ""
 
@@ -136,24 +140,146 @@ function addSpaceForPrice(str) {
     return newstr
 }
 
-function rate(){
-    for(let i in stars){
-        stars[i].addEventListener("click",function(){
-            // xóa all check 
-            for(let star of stars){
-                try{
-                    star.classList.remove("checked")
-                }
-                catch{}
+// RATE (CLICK THE STAR)
+for (let i = 0; i < stars.length; i++) {
+    stars[i].addEventListener("click", function () {
+        // xóa all check 
+        for (let star of stars) {
+            try {
+                star.classList.remove("checked")
             }
+            catch { }
+        }
 
-            // check mấy cái phía trước
-            let j = i
-            while(j>=0){
-                stars[j].classList.add("checked")
-                j--
-            }
+        // check mấy cái phía trước
+        let j = i
+        while (j >= 0) {
+            stars[j].classList.add("checked")
+            j--
+        }
+    })
+}
+
+// COMMENT 
+let comments = JSON.parse(localStorage.getItem("commentsList")) || []
+
+rateForm.addEventListener("submit", function (e) {
+    e.preventDefault()
+    if (input.value != "" && input.value != " ") {
+        comments.push({
+            content: input.value,
+            rate: document.getElementsByClassName("checked").length - 5,
+            name: JSON.parse(localStorage.getItem("currentAccount")).name,
+            imgs: getImgURL(),
         })
     }
+    localStorage.setItem("commentsList", JSON.stringify(comments))
+
+    input.value = ""
+    for (let i = 0; i < (document.getElementsByClassName("checked").length - 5); i++) {
+        document.getElementsByClassName("checked")[i].classList.remove("checked")
+    }
+    location.reload()
+})
+
+// VISIBLE COMMENTS
+const visibleRate = document.getElementById("visible-rate")
+let choices = document.getElementsByClassName("choice")
+
+// set default
+choices[0].classList.add("chosen")
+for (let com of comments) {
+    createMessages(com, com.rate)
 }
-rate()
+
+
+function createMessages(comment) {
+
+    let container = document.createElement("div")
+    container.classList.add("message")
+
+    let messContent = document.createElement("p")
+    messContent.innerHTML = "&ensp;&ensp;" + comment.content
+    container.appendChild(messContent)
+
+    let avt = document.createElement("div")
+    avt.style.backgroundImage = `url(${"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhCGFOnskMALRw2KM6rmRceMvT4LPzMAm4dnowW9Y-OruJqEk9H78Ob-yyd0veE_zbKqo&usqp=CAU"})`
+    avt.classList.add("avt")
+    container.appendChild(avt)
+
+    let starContainer = document.createElement("div")
+    starContainer.classList.add("star-container")
+
+    for (let i = 0; i < comment.rate; i++) {
+        let star = document.createElement("span")
+        star.classList.add("fa", "fa-star")
+        starContainer.appendChild(star)
+    }
+    container.appendChild(starContainer)
+
+    let imgContainer = document.createElement("div")
+    imgContainer.classList.add("img-rate-container")
+
+    for (let i in comment.imgs) {
+        let newImage = document.createElement("img")
+        newImage.src = comment.imgs[i]
+
+        imgContainer.appendChild(newImage)
+    }
+    visibleRate.appendChild(container)
+    visibleRate.appendChild(imgContainer)
+}
+
+for (let choice of choices) {
+    choice.addEventListener("click", function () {
+        // remove chosen previous
+        for (let choice of choices) {
+            if (choice.classList.contains("chosen")) {
+                choice.classList.remove("chosen")
+            }
+        }
+        visibleRate.replaceChildren()
+
+        // visible which is chosen
+        choice.classList.add("chosen")
+        let starNum = parseInt(choice.innerHTML[0]) || 0
+
+        for (let comment of comments) {
+
+            if (comment.rate == starNum && starNum != 0) {
+                createMessages(comment)
+            }
+            else if (starNum == 0) {
+                visibleRate.replaceChildren()
+
+                for (let com of comments) {
+                    createMessages(com)
+                }
+            }
+        }
+    })
+}
+
+// VISIBLE COMMENT IMAGE
+
+inputFile.addEventListener("change", function (e) {
+    for (let file of e.target.files) {
+        let previewImg = document.createElement("img")
+        previewImg.classList.add("preview-img")
+
+        let url = window.URL.createObjectURL(file)
+        previewImg.src = url
+
+        rateImgContainer.appendChild(previewImg)
+    }
+})
+
+
+function getImgURL() {
+    let imgs = rateImgContainer.querySelectorAll("img")
+    let imgList = []
+    for (let img of imgs) {
+        imgList.push(img.src)
+    }
+    return imgList
+}

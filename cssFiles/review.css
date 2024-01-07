@@ -180,30 +180,120 @@ hr{
 }
 #comment{
     width: 100vw;
-    height: 30vh;
-    background-color: bisque;
+}
+#comment h2{
+    font-family: athene;
+    margin: 0px 0 0 70px;
+    padding-top: 30px;
 }
 #rate{
+    background-color: blanchedalmond;
+    padding: 20px 0 ;
     font-family: vollkorn;
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
+    height: 5vh;
 }
 #rate li{
     text-align: center;
     padding: 10px 0;
     cursor: pointer;
-    width: 15%;
+    width: calc(100%/4);
 }
 #rate li:hover{
     color: white;
     background-color: rgba(0, 0, 0, 0.827);
 }
+#visible-rate span{
+    color: orange;
+}
 .checked {
     color: orange;
+}
+#rate-form{
+    width: 32%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
 }
 #rate-form input{
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
+}
+.chosen{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.827);
+}
+#visible-rate{
+    min-height: 30vh;
+    width: 100vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: vollkorn;
+}
+.message{
+    position: relative;
+    background-color: white;
+    min-width: 100px;
+    min-height: 30px;
+    max-width: 93%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 15px 0 20px 50px;
+    padding: 10px 0;
+}
+.message p{
+    padding:  0 10px;
+}
+.avt{
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    border: 5px solid #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+.star-container{
+    filter: brightness(160%);
+    width: 100px;
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    font-size: 15px;
+}
+#inputfile {
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+#inputfile + label {
+    cursor: pointer;
+    display: inline-block;
+}
+.preview-img{
+    margin: 10px 0 0 5px;
+    max-width: 100px;
+}
+#rate-img-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.img-rate-container{
+    position: relative;
+    margin: -10px 0 0 55px;
+}
+.img-rate-container img{
+    padding: 0px 5px 10px 0;
+    max-width: 100px;
 }

@@ -126,7 +126,6 @@ body{
     z-index: 4;
     display: flex;
     align-items: center;
-    position: fixed;
     margin: 52vh 0 0 87vw;
     cursor: pointer;
     font-family: medio;
