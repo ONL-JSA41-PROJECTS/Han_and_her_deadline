@@ -88,3 +88,19 @@
     display: flex;
     align-items: center;
 }
+#contact{
+    z-index: 6;
+    position: fixed;
+    margin: 93vh 0 0 10px;
+}
+#contact img{
+    padding: 0 5px;
+    position: relative;
+    width: 40px;
+    transition: all 0.3s;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.426));
+}
+#contact img:hover{
+    transform: rotate(-30deg);
+    filter: brightness(70%);
+}

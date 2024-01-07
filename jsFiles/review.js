@@ -17,6 +17,7 @@ const submit = document.getElementById("submit")
 const form = document.getElementById("form")
 const cancel = document.getElementById("cancel")
 const payMethod = document.getElementById("pay-method")
+const stars = document.getElementsByClassName("star")
 let temp = 0
 
 // visible product information
@@ -134,3 +135,25 @@ function addSpaceForPrice(str) {
 
     return newstr
 }
+
+function rate(){
+    for(let i in stars){
+        stars[i].addEventListener("click",function(){
+            // xóa all check 
+            for(let star of stars){
+                try{
+                    star.classList.remove("checked")
+                }
+                catch{}
+            }
+
+            // check mấy cái phía trước
+            let j = i
+            while(j>=0){
+                stars[j].classList.add("checked")
+                j--
+            }
+        })
+    }
+}
+rate()

@@ -13,9 +13,13 @@
 </head>
 
 <body>
+    <div id="contact">
+        <a href="../assets/zaloQR.jpg"><img src="../assets/zalo-icon.png" alt=""></a>
+        <a href="https://www.facebook.com/profile.php?id=100089121772118&locale=vi_VN"><img src="../assets/Facebook_Logo_2023.png" alt=""></a>
+    </div>
+
     <div id="main">
         <div id="vouchers" class="warmGrey">
-
         </div>
 
         <div id="chosen">
@@ -54,9 +58,10 @@
                     <span id="before-discount"><b>Price: </b></span>
                     <hr>
                     <span id="total"><b>Total: </b></span>
+                    <span id="minus"></span>
                 </div>
                 
-                <br><br>
+                <br><br><br><br><br>
 
                 <i> - Wine Connoiseur Online Store - </i>
                 <i>since 1995</i>
@@ -73,8 +78,27 @@
                     <span class="material-symbols-outlined">shopping_cart</span>
                 </a>
             </div>
+        </div>
 
-
+        <div id="customer-payment-info" class="warmGrey">
+            <form action="" id="form">
+                <div id="user-address">
+                    <label for="address">Your address:</label>
+                    <input type="text" placeholder="Address" required>
+                </div>
+    
+    
+                <label for="pay-method"> Choose your payment method: </label>
+                <select name="pay-method" id="pay-method">
+                    <option value="none">None</option>
+                    <option value="after-delivered">Pay after your item is delivered</option>
+                    <option value="credit-card">Credit card (VNPay)</option>
+                </select>
+    
+                <input type="submit" name="" id="submit" value="Deliver now">
+                <button id="cancel">Cancel</button>
+    
+            </form>
         </div>
     </div>
 

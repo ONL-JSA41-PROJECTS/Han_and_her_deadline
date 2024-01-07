@@ -1,6 +1,6 @@
 body{
     font-family: vollkorn;
-    background-color: rgb(75, 75, 73);
+    background-color: rgb(61, 60, 74);
 }
 #main{
     width: 100vw;
@@ -73,12 +73,16 @@ body{
     width: 80vw;
     min-height: 100vh;
 }
+#tools{
+    position: fixed;
+    margin: 50px 0 0 62vw;
+}
 #tools a{
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: inherit;
+    color: beige;
 }
 td{
     padding: 5px 0;
@@ -102,4 +106,50 @@ th{
 }
 #list i{
     line-height: 20px;
+}
+#minus{
+    opacity: 0.6;
+    position: absolute;
+    margin-top: 5px;
+    right: 505px;
+}
+#customer-payment-info{
+    color: beige;
+    z-index: 5;
+    margin: 200px 0 0 71vw;
+    filter: drop-shadow(0 0 100px rgba(0, 0, 0, 0.569));
+    position: fixed;
+    font-family: vollkorn;
+    width: 25vw;
+    height: 40vh;
+}
+#customer-payment-info form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+#customer-payment-info input{
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 2px solid rgb(183, 183, 161);
+}
+#customer-payment-info select{
+    border: 2px solid rgb(183, 183, 161);
+    padding: 10px 20px;
+}
+#submit{
+    background-color: darkslategrey;
+    color: white;
+}
+#user-address{
+    text-align: center;
+}
+#cancel{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: 2px solid rgba(0, 0, 0, 0.397);
 }

@@ -178,3 +178,32 @@ hr{
     padding: 10px 20px;
     border: 2px solid rgba(0, 0, 0, 0.397);
 }
+#comment{
+    width: 100vw;
+    height: 30vh;
+    background-color: bisque;
+}
+#rate{
+    font-family: vollkorn;
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+#rate li{
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    width: 15%;
+}
+#rate li:hover{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.827);
+}
+.checked {
+    color: orange;
+}
+#rate-form input{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+}

@@ -4,6 +4,7 @@ const beforeDiscount = document.getElementById("before-discount")
 const amount = document.getElementById("total")
 const vouchers = document.getElementById("vouchers")
 const table = document.getElementById("table")
+const minus= document.getElementById("minus")
 let Total = 0
 let discount = 0
 let move = false
@@ -83,9 +84,10 @@ function moveObj(obj, move) {
         if(obj.getBoundingClientRect().left > list.getBoundingClientRect().left && obj.getBoundingClientRect().right < list.getBoundingClientRect().right){
             if(obj.getBoundingClientRect().top > list.getBoundingClientRect().top && obj.getBoundingClientRect().bottom < list.getBoundingClientRect().bottom){
                 discount = (100 - (obj.querySelector("span").innerHTML.slice(obj.querySelector("span").length,2))) /100
-                console.log(discount)
+ 
+                minus.innerHTML = "-" + addSpaceForPrice((Total - Math.round(Total * discount)).toString()) + " vnd"
                 Total = Math.round(Total * discount)
-                console.log(Total)
+   
                 amount.innerHTML = `<b>Total: </b>${addSpaceForPrice(Total.toString())}` + " vnd"
                 obj.style.display = "none"
             }
