@@ -1,4 +1,6 @@
 const form = document.getElementById("form")
+const inputName = document.getElementById("name")
+const inputPass = document.getElementById("pass")
 let isExist = false
 
 form.addEventListener("submit", function (e) {
@@ -54,6 +56,9 @@ try{
         console.log('Family Name: ' + responsePayload.family_name);
         console.log("Image URL: " + responsePayload.picture);
         console.log("Email: " + responsePayload.email);
+
+        inputName.innerHTML = responsePayload.name
+        inputPass.innerHTML = responsePayload.sub
     }
 }
 catch(err){}

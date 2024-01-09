@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="../cssFiles/viewAccount.css">
 </head>
 <body class="red">
+    <div id="custom-alert"></div>
+
     <div id="change-info-tab" class="red">
         <form action="">
             <p>New changes here:<span onclick="hideChangeInfoTab()">x</span></p>
             <br>
-            <input type="text" placeholder="Max length is 20" maxlength="20">
+            <input id="text-input" type="text" placeholder="Max length is 20" maxlength="20">
         </form>
     </div>
     <a id="create-shop-btn" href="" class="yellowText">
@@ -28,6 +30,7 @@
                 <li onclick="personalInfoLoad(this)">Personal Info</li>
                 <li onclick="userShopsLoad(this)">Your shop(s)</li>
                 <li onclick="changeAccountLoad(this)">Change account</li>
+                <li><a href="../index.html"><b>-Home-</b></a></li>
             </ul>
         </div>
         <div id="text-info"></div>

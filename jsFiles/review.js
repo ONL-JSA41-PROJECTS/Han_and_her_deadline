@@ -229,7 +229,9 @@ function createMessages(comment) {
     for (let i in comment.imgs) {
         let newImage = document.createElement("img")
         newImage.src = comment.imgs[i]
-        newImage.setAttribute(`onclick","zoomIMG(${this})`)
+        newImage.onclick = function(){
+            zoomIMG(this)
+        }
 
         imgContainer.appendChild(newImage)
     }
