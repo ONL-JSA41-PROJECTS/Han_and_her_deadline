@@ -165,11 +165,17 @@ let comments = JSON.parse(localStorage.getItem("commentsList")) || []
 
 rateForm.addEventListener("submit", function (e) {
     e.preventDefault()
+    // block if is not logged in
+    if(!JSON.parse(localStorage.getItem("currentAccount"))){
+        window.location.href = "../pages/login.html"
+        alert("Please log in to chat")
+    }
     if (input.value != "" && input.value != " ") {
         comments.push({
             content: input.value,
             rate: document.getElementsByClassName("checked").length - 5,
             name: JSON.parse(localStorage.getItem("currentAccount")).name,
+            avt:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhCGFOnskMALRw2KM6rmRceMvT4LPzMAm4dnowW9Y-OruJqEk9H78Ob-yyd0veE_zbKqo&usqp=CAU",//NEED UPDATE
             imgs: getImgURL(),
         })
     }
@@ -203,7 +209,7 @@ function createMessages(comment) {
     container.appendChild(messContent)
 
     let avt = document.createElement("div")
-    avt.style.backgroundImage = `url(${"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhCGFOnskMALRw2KM6rmRceMvT4LPzMAm4dnowW9Y-OruJqEk9H78Ob-yyd0veE_zbKqo&usqp=CAU"})`
+    avt.style.backgroundImage = `url(${comment.avt})`
     avt.classList.add("avt")
     container.appendChild(avt)
 
@@ -223,6 +229,7 @@ function createMessages(comment) {
     for (let i in comment.imgs) {
         let newImage = document.createElement("img")
         newImage.src = comment.imgs[i]
+        newImage.setAttribute(`onclick","zoomIMG(${this})`)
 
         imgContainer.appendChild(newImage)
     }
@@ -282,4 +289,11 @@ function getImgURL() {
         imgList.push(img.src)
     }
     return imgList
+}
+
+
+// ZOOM RATE COMMENT IMG
+function zoomIMG(img){
+    let source = img.src
+    console.log(source)
 }

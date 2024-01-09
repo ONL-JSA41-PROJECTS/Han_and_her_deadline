@@ -38,8 +38,14 @@
 .goldtext{
     color: #EA906C;
 }
+.darkgrey{
+    background-color: #3D3B40;
+}
 .yellow{
     background-color: #E2C799;
+}
+.yellowText{
+    color: #E2C799;
 }
 .gold{
     background-color: #EA906C;
@@ -60,7 +66,7 @@
     background-color:#E9B384;
 }
 .darkYellow{
-    background-color: #E2C799;
+    background-color: #d1b482;
 }
 .warmGrey{
     background-color: #746060;

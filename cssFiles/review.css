@@ -173,6 +173,9 @@ hr{
     color: white;
 }
 #cancel{
+    position: absolute;
+    bottom: -60px;
+    left: 42%;
     cursor: pointer;
     border-radius: 10px;
     padding: 10px 20px;

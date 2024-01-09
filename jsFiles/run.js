@@ -60,7 +60,7 @@ function normalize(str){
 function searchItem(){
     let items=document.querySelectorAll(".col")
     
-    if(searchInput.value != ""){
+    if(searchInput.value.trim() !=0){
         
         for(let item of items){
             if(normalize(item.querySelector("p").innerHTML).includes(normalize(searchInput.value))){

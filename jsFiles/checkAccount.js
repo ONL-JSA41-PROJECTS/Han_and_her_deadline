@@ -1,4 +1,6 @@
 const form = document.getElementById("form")
+const inputName = document.getElementById("name")
+const inputPass = document.getElementById("pass")
 let accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
 
 form.addEventListener("submit",function (e) {
@@ -61,4 +63,7 @@ window.handleCredentialResponse = (response) => {
     console.log('Family Name: ' + responsePayload.family_name);
     console.log("Image URL: " + responsePayload.picture);
     console.log("Email: " + responsePayload.email);
+
+    inputName.innerHTML = responsePayload.name
+    inputPass.innerHTML = responsePayload.sub
 }
