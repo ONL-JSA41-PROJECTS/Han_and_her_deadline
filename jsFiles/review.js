@@ -22,7 +22,14 @@ const input = document.getElementById("input")
 const rateForm = document.getElementById("rate-form")
 const inputFile = document.getElementById("inputfile")
 const rateImgContainer = document.getElementById("rate-img-container")
+const shopImg = document.getElementById("shop-img")
+const shopName = document.getElementById("shop-name")
 let temp = 0
+
+
+// DISPLAY SHOP INFO
+shopName.innerHTML = reviewItem.shopName || "SHOPNAME"
+shopImg.src = reviewItem.shopImg || "https://i.pinimg.com/originals/bc/d8/39/bcd83978d462922ddbd4dcc0b5cedc02.jpg"
 
 // visible product information
 let productImage = document.createElement("img")

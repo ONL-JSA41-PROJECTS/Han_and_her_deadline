@@ -10,22 +10,25 @@
     <link rel="stylesheet" href="../cssFiles/viewAccount.css">
 </head>
 <body class="red">
-    <div id="custom-alert"></div>
 
     <div id="change-info-tab" class="red">
         <form action="">
             <p>New changes here:<span onclick="hideChangeInfoTab()">x</span></p>
             <br>
-            <input id="text-input" type="text" placeholder="Max length is 20" maxlength="20">
+            <input id="text-input" type="text" placeholder="Max length is 20" maxlength="20"  value="">
         </form>
     </div>
-    <a id="create-shop-btn" href="" class="yellowText">
-        <span class="material-symbols-outlined">new_window</span>
-        <span>Create a shop</span>
-    </a>
     <div id="setting-info" class="white">
         <div id="avt" class="darkgrey">
+            <div id="custom-alert"></div>
+            
             <img src="" alt="">
+            <label for="edit-avt">
+                <span id="edit-avt-btn" class="material-symbols-outlined">edit</span>
+            </label>
+            <input type="file" id="edit-avt">
+            
+
             <ul id="tab" class="white">
                 <li onclick="personalInfoLoad(this)">Personal Info</li>
                 <li onclick="userShopsLoad(this)">Your shop(s)</li>
@@ -36,6 +39,7 @@
         <div id="text-info"></div>
     </div>
 
+    <script src="../datas/productList.js"></script>
     <script src="../jsFiles/viewAccount.js"></script>
 </body>
 </html>
