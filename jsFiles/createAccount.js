@@ -48,8 +48,8 @@ try{
     window.handleCredentialResponse = (response) => {
         const responsePayload = decodeJwtResponse(response.credential);
 
-        inputName.innerHTML = responsePayload.name
-        inputPass.innerHTML = responsePayload.sub
+        inputName.value = responsePayload.name
+        inputPass.value = responsePayload.sub
     }
 }
 catch(err){}
