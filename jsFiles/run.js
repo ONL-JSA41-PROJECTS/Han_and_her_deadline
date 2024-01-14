@@ -1,7 +1,6 @@
 userAddedProducts = JSON.parse(sessionStorage.getItem("addedProducts")) || []
 
 const sound = document.getElementById("sound")
-const items = document.querySelectorAll(".col")
 const topper = document.getElementById("topper")
 const search = document.getElementById("search")
 const searchInput = document.getElementById("searchInput")
@@ -15,6 +14,10 @@ home.addEventListener("click", function () {
 cart.addEventListener("click", function () {
     window.location.href = "./cart.html"
 })
+cartQuantity.addEventListener("click",function(){
+    window.location.href = "./cart.html"
+})
+
 // other features
 let inReview = false
 
@@ -23,19 +26,15 @@ document.addEventListener("click", async function (e) {
     await sound.play()
 })
 // review product
-for (let i = 0; i < items.length; i++) {
-    items[i].addEventListener("click", function (e) {
-        e.preventDefault()
+function moveToReview(item,i){
+    if (item.type == "original") {
+        addToReview(true, i)
+    }
+    else {
+        addToReview(false, i)
+    }
 
-        if ( i< products.length) {
-            addToReview(true, i)
-        }
-        else {
-            addToReview(false, i - products.length)
-        }
-
-        window.location.href = "../pages/review.html"
-    })
+    window.location.href = "../pages/review.html"
 }
 // add to cart 
 function addToReview(original,i) {
@@ -49,7 +48,7 @@ function addToReview(original,i) {
             describe: products[i].describe,
             more: products[i].more,
             shopImg: products[i].shopImg,
-            shopName: products[i].shop
+            shop: products[i].shop
         }
     }
     else {
@@ -61,7 +60,7 @@ function addToReview(original,i) {
             describe: userAddedProducts[i].describe,
             more: userAddedProducts[i].more,
             shopImg: userAddedProducts[i].shopImg,
-            shopName: userAddedProducts[i].shop
+            shop: userAddedProducts[i].shop
         }
     }
 

@@ -29,7 +29,7 @@ let temp = 0
 
 
 // DISPLAY SHOP INFO
-shopName.innerHTML = reviewItem.shopName || "SHOPNAME"
+shopName.innerHTML = reviewItem.shop || "SHOPNAME"
 shopImg.src = reviewItem.shopImg || "https://i.pinimg.com/originals/bc/d8/39/bcd83978d462922ddbd4dcc0b5cedc02.jpg"
 
 // visible product information
@@ -87,6 +87,8 @@ btn.addEventListener("click", function (e) {
                 img: reviewItem.img,
                 price: reviewItem.price,
                 quantity: temp,
+                shopImg: reviewItem.shopImg,
+                shopName: reviewItem.shop,
                 more: reviewItem.more
             })
 
@@ -95,6 +97,8 @@ btn.addEventListener("click", function (e) {
                 img: reviewItem.img,
                 price: reviewItem.price,
                 quantity: temp,
+                shopImg: reviewItem.shopImg,
+                shopName: reviewItem.shop,
                 more: reviewItem.more
             })
         }
@@ -121,17 +125,16 @@ pay.addEventListener("click", function () {
 
     form.addEventListener("submit", function () {
         paymentInfo.style.display = "none"
-        alert("Deliver soon")
+        if(payMethod.value == "after-delivered"){
+            alert("Deliver soon")
+        }
+        else{
+            window.open("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1806000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=DEMOV210&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHash=3e0d61a0c0534b2e36680b3f7277743e8784cc4e1d68fa7d276e79c23be7d6318d338b477910a27992f5057bb1582bd44bd82ae8009ffaf6d141219218625c42", "_blank")
+        }
     })
 })
 cancel.addEventListener("click", function () {
     paymentInfo.style.display = "none"
-})
-
-payMethod.addEventListener("change", function () {
-    if (payMethod.value == "credit-card") {
-        window.open("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1806000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=DEMOV210&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHash=3e0d61a0c0534b2e36680b3f7277743e8784cc4e1d68fa7d276e79c23be7d6318d338b477910a27992f5057bb1582bd44bd82ae8009ffaf6d141219218625c42", "_blank")
-    }
 })
 
 // ADD DOT FOR EVERY 3 UNITS

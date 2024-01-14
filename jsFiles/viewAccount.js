@@ -456,11 +456,14 @@ function createProduct(shopIndex) {
     form.onsubmit = function (e) {
         e.preventDefault()
         let productsList = JSON.parse(localStorage.getItem("currentAccount")).shops[index].products || []
-        console.log(typeof (productsList))
+        
+        let date = new Date()
+
         productsList.push({
             name: productName.value,
             info: productDescribe.value,
             price:productPrice.value,
+            publish_date:date.toLocaleDateString(),
             img: url
         })
 
@@ -485,6 +488,7 @@ function addAll() {
         for (let account of accounts) {
             for (let shop of account.shops) {
                 for (let product of shop.products) {
+                    
                     userAddedProducts.push({
                         name: product.name,
                         describe: product.info,
@@ -492,6 +496,7 @@ function addAll() {
                         price: product.price || 0,
                         shop: shop.name,
                         shopImg: shop.cover,
+                        publish_date: product.publish_date,
                         more: shop.info,
                     })
                 }
