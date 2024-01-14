@@ -418,8 +418,9 @@ function createProduct(shopIndex) {
 
     let productPrice = document.createElement("input")
     productPrice.type = "number"
+    productPrice.required = "true"
     productPrice.min = "0"
-    productPrice.placeholder = "Price of your product ($)"
+    productPrice.placeholder = "Price of your product (vnđ)"
     form.appendChild(productPrice)
 
     let productImgInput = document.createElement("input")
@@ -478,23 +479,28 @@ function createProduct(shopIndex) {
 // ADD USER PRODUCTS && SHOPS INTO SHOP PAGE
 function addAll() {
     let accounts = JSON.parse(localStorage.getItem("userAccounts"))
+    let userAddedProducts = []
 
-    for (let account of accounts) {
-        for (let shop of account.shops) {
-            for (let product of shop.products) {
-                products.push({
-                    name: product.name,
-                    describe: product.info,
-                    img: product.img,
-                    price: product.price || 0,
-                    shop: shop,
-                    shopImg: shop.cover,
-                    more: shop.info,
-                })
-                console.log(product)
+    try{
+        for (let account of accounts) {
+            for (let shop of account.shops) {
+                for (let product of shop.products) {
+                    userAddedProducts.push({
+                        name: product.name,
+                        describe: product.info,
+                        img: product.img,
+                        price: product.price || 0,
+                        shop: shop.name,
+                        shopImg: shop.cover,
+                        more: shop.info,
+                    })
+                }
             }
         }
     }
-}
+    catch(err){}
+    console.log(userAddedProducts)
 
+    sessionStorage.setItem("addedProducts",JSON.stringify(userAddedProducts))
+}
 addAll()

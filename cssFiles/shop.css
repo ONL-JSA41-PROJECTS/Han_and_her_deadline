@@ -8,12 +8,12 @@ body{
     font-weight: bold;
 }
 #list{
+    margin: 50px 0 0 115px;
     z-index: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 100px;
 }
 #home{
     font-size: 30px;
@@ -38,13 +38,6 @@ body{
     width: 100vw;
     height: 100vh;
 }
-.row{
-    align-items: center;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 #topper{
     z-index: 4;
     cursor: pointer;
@@ -64,10 +57,10 @@ body{
     background-color: rgba(245, 245, 245, 0.758);
 }
 .col{
+    position: relative;
     cursor: pointer;
-    margin: 30px 100px;
-    width: 15%;
     height: 230px;
+    width: 210px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +96,7 @@ body{
     border: 1px solid #994d24;
 }
 .col:hover{
-    width: 30%;
+    width: 420px;
     justify-content: space-around;
 }
 .col:hover .infor{

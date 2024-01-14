@@ -4,7 +4,8 @@ const login = document.getElementById("login_signup").querySelector("a")
 const logout = document.getElementById("login_signup").querySelector("span")
 
 let account = JSON.parse(localStorage.getItem("currentAccount")) || {}
-let url = "https://cn-e-pic.itoon.org/cartoon-posters/24244213562.webp"
+let url = account.avt || "https://i.pinimg.com/originals/bc/d8/39/bcd83978d462922ddbd4dcc0b5cedc02.jpg" //default avt link
+
 
 function getUserAccount(){
 

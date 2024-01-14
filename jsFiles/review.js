@@ -1,5 +1,6 @@
 let reviewItem = JSON.parse(localStorage.getItem("userReview")) || []
 let userCart = JSON.parse(localStorage.getItem("userCart")) || []
+let userAddedProducts = JSON.parse(sessionStorage.getItem("addedProducts")) || []
 const accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
 const account = JSON.parse(localStorage.getItem("currentAccount")) || {}
 
@@ -65,7 +66,6 @@ if (JSON.parse(localStorage.getItem("userAccounts")) && JSON.parse(localStorage.
         currentQuantity.innerHTML = `Current quantity: ${accountsList[accountIndex].cart[index].quantity}`
     }
 }
-
 
 // ADD TO CART
 btn.addEventListener("click", function (e) {
@@ -167,22 +167,30 @@ for (let i = 0; i < stars.length; i++) {
     })
 }
 
+function returnProductName(name) {
+    if (name == "Wine Connoiseurs Original"){
+        return products[reviewItem.productIndex].name
+    }
+    return userAddedProducts[reviewItem.productIndex].name
+}
+
 // COMMENT 
 let comments = JSON.parse(localStorage.getItem("commentsList")) || []
 
 rateForm.addEventListener("submit", function (e) {
     e.preventDefault()
     // block if is not logged in
-    if(!JSON.parse(localStorage.getItem("currentAccount"))){
+    if (!JSON.parse(localStorage.getItem("currentAccount"))) {
         window.location.href = "../pages/login.html"
         alert("Please log in to chat")
     }
     if (input.value != "" && input.value != " ") {
         comments.push({
             content: input.value,
+            productName: returnProductName(reviewItem.shopName),
             rate: document.getElementsByClassName("checked").length - 5,
-            name: JSON.parse(localStorage.getItem("currentAccount")).name,
-            avt:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhCGFOnskMALRw2KM6rmRceMvT4LPzMAm4dnowW9Y-OruJqEk9H78Ob-yyd0veE_zbKqo&usqp=CAU",//NEED UPDATE
+            name: account.name,
+            avt: account.avt,
             imgs: getImgURL(),
         })
     }
@@ -202,7 +210,10 @@ let choices = document.getElementsByClassName("choice")
 // set default
 choices[0].classList.add("chosen")
 for (let com of comments) {
-    createMessages(com, com.rate)
+
+    if (com.productName == reviewItem.name) {
+        createMessages(com, com.rate)
+    }
 }
 
 
@@ -236,9 +247,6 @@ function createMessages(comment) {
     for (let i in comment.imgs) {
         let newImage = document.createElement("img")
         newImage.src = comment.imgs[i]
-        newImage.onclick = function(){
-            zoomIMG(this)
-        }
 
         imgContainer.appendChild(newImage)
     }
@@ -261,15 +269,16 @@ for (let choice of choices) {
         let starNum = parseInt(choice.innerHTML[0]) || 0
 
         for (let comment of comments) {
-
-            if (comment.rate == starNum && starNum != 0) {
+            if (comment.productName == reviewItem.name && comment.rate == starNum && starNum != 0) {
                 createMessages(comment)
             }
             else if (starNum == 0) {
                 visibleRate.replaceChildren()
 
                 for (let com of comments) {
-                    createMessages(com)
+                    if(com.productName == reviewItem.name){
+                        createMessages(com)
+                    }
                 }
             }
         }
@@ -298,11 +307,4 @@ function getImgURL() {
         imgList.push(img.src)
     }
     return imgList
-}
-
-
-// ZOOM RATE COMMENT IMG
-function zoomIMG(img){
-    let source = img.src
-    console.log(source)
 }
