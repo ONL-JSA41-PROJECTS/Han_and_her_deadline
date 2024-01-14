@@ -19,7 +19,7 @@ function getUserAccount(){
     else{
         login.innerHTML = "Login/Signup"
         logout.innerHTML="no_accounts"
-        login.href = "./pages/login.html"
+        login.href = "../pages/login.html" || "https://onl-jsa41-projects.github.io/Han_and_her_deadline/pages/login.html"
         userAvt.style.display = "none"
     }
 }
