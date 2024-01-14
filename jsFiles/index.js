@@ -19,7 +19,7 @@ function getUserAccount(){
     else{
         login.innerHTML = "Login/Signup"
         logout.innerHTML="no_accounts"
-        login.href = "../pages/login.html"
+        login.href = "./pages/login.html"
         userAvt.style.display = "none"
     }
 }
