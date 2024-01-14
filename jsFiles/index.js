@@ -13,13 +13,13 @@ function getUserAccount(){
         login.innerHTML = `Welcome! ${account.name}`
         userAvt.style.backgroundImage = `url(${url})`
         logout.innerHTML="logout"
-        login.href = "../pages/viewAccount.html"
+        login.href = "./pages/viewAccount.html"
         userAvt.style.display = "inline-block"
     }
     else{
         login.innerHTML = "Login/Signup"
         logout.innerHTML="no_accounts"
-        login.href =  "https://onl-jsa41-projects.github.io/Han_and_her_deadline/pages/login.html"
+        login.href =  "./pages/login.html"
         userAvt.style.display = "none"
     }
 }
@@ -37,5 +37,5 @@ logout.addEventListener("click",function(){
 getUserAccount()
 
 userAvt.addEventListener("click",function(){
-    window.location.href = "../pages/viewAccount.html"
+    window.location.href = "./pages/viewAccount.html"
 })
