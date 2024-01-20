@@ -39,3 +39,36 @@ getUserAccount()
 userAvt.addEventListener("click",function(){
     window.location.href = "./pages/viewAccount.html"
 })
+
+// ADD USER PRODUCTS && SHOPS INTO SHOP PAGE
+function addAll() {
+    let userAddedProducts = []
+
+    try{
+        accounts = JSON.parse(localStorage.getItem("userAccounts"))
+
+        for (let account of accounts) {
+            for (let shop of account.shops) {
+                for (let product of shop.products) {
+                    userAddedProducts.push({
+                        id: product.id,
+                        name: product.name,
+                        describe: product.info,
+                        img: product.img,
+                        price: product.price || 0,
+                        shop: shop.name,
+                        shopImg: shop.cover,
+                        publish_date: product.publish_date,
+                        more: shop.info,
+                    })
+                }
+            }
+        }
+        console.log(userAddedProducts)
+    }
+    catch(err){}
+
+    sessionStorage.setItem("addedProducts",JSON.stringify(userAddedProducts))
+}
+
+    addAll()

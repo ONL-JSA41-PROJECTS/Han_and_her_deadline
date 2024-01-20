@@ -1,4 +1,5 @@
 let reviewItem = JSON.parse(localStorage.getItem("userReview")) || []
+let addedPurchasesList = JSON.parse(sessionStorage.getItem("addedPurchasesItems")) || []
 let userCart = JSON.parse(localStorage.getItem("userCart")) || []
 let userAddedProducts = JSON.parse(sessionStorage.getItem("addedProducts")) || []
 const accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
@@ -25,11 +26,16 @@ const inputFile = document.getElementById("inputfile")
 const rateImgContainer = document.getElementById("rate-img-container")
 const shopImg = document.getElementById("shop-img")
 const shopName = document.getElementById("shop-name")
+const shopInfo = document.getElementById("shop-info")
 let temp = 0
 
 
 // DISPLAY SHOP INFO
 shopName.innerHTML = reviewItem.shop || "SHOPNAME"
+shopInfo.onclick = function(){
+    console.log(reviewItem)
+    window.location.href = "../pages/shopReview.html"
+}
 shopImg.src = reviewItem.shopImg || "https://i.pinimg.com/originals/bc/d8/39/bcd83978d462922ddbd4dcc0b5cedc02.jpg"
 
 // visible product information
@@ -41,6 +47,9 @@ price.innerHTML = addSpaceForPrice((reviewItem.price * 1000).toString()) + " vnÄ
 productName.innerHTML = reviewItem.name
 describe.innerHTML = reviewItem.describe
 more.innerHTML = reviewItem.more
+
+let accountIndex
+let index
 
 // after added to cart - notification
 async function tb() {
@@ -55,8 +64,8 @@ async function tb() {
 }
 // get product's current quantity
 if (JSON.parse(localStorage.getItem("userAccounts")) && JSON.parse(localStorage.getItem("currentAccount"))) {
-    let accountIndex = accountsList.findIndex(elm => elm.name == account.name && elm.pass == account.pass)
-    let index = accountsList[accountIndex].cart.findIndex(item => item.name == reviewItem.name)
+    accountIndex = accountsList.findIndex(elm => elm.name == account.name && elm.pass == account.pass)
+    index = accountsList[accountIndex].cart.findIndex(item => item.name == reviewItem.name)
 
     if (index == -1) {
         currentQuantity.innerHTML += "0"
@@ -123,12 +132,60 @@ pay.addEventListener("click", function () {
     // automatically reset payment method
     payMethod.value = "none"
 
-    form.addEventListener("submit", function () {
-        paymentInfo.style.display = "none"
-        if(payMethod.value == "after-delivered"){
+    form.addEventListener("submit", function (e) {
+        e.preventDefault()
+
+        if (payMethod.value == "after-delivered") {
+            console.log(reviewItem.type)
+
+                if (reviewItem.type == "original") {
+                    let addedIndex = addedPurchasesList.findIndex(elm => elm.id == reviewItem.id)
+    
+                    if (addedIndex != -1) {
+                            addedPurchasesList[addedIndex].purchases += 1
+                            sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+                    }
+                    else {
+                        addedPurchasesList.push({
+                            id:reviewItem.id,
+                            name: products[reviewItem.productIndex].name,
+                            purchases: 1,
+                        })
+                    }
+    
+                    sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+                }
+                else{
+                    let addedIndex  = addedPurchasesList.findIndex(elm => elm.id == userAddedProducts[reviewItem.productIndex].id)
+    
+                    if(addedIndex != -1){
+                        addedPurchasesList[addedIndex].purchases += 1
+                        sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+                    }
+                    else{
+                        addedPurchasesList.push({
+                            id: userAddedProducts[reviewItem.productIndex].id,
+                            name: userAddedProducts[reviewItem.productIndex].name,
+                            purchases: 1,
+                        })
+                    }
+    
+                    sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+                }
+    
+            account.cart = []
+            accountsList[accountIndex].cart = []
+    
+            localStorage.setItem("currentAccount", JSON.stringify(account))
+            localStorage.setItem("userAccounts", JSON.stringify(accountsList))
+    
+            location.reload()
             alert("Deliver soon")
         }
-        else{
+        else if (payMethod.value == "none") {
+            alert("Please choose a method")
+        }
+        else {
             window.open("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1806000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=DEMOV210&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHash=3e0d61a0c0534b2e36680b3f7277743e8784cc4e1d68fa7d276e79c23be7d6318d338b477910a27992f5057bb1582bd44bd82ae8009ffaf6d141219218625c42", "_blank")
         }
     })

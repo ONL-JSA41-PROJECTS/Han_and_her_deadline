@@ -6,6 +6,9 @@ const search = document.getElementById("search")
 const searchInput = document.getElementById("searchInput")
 const home = document.getElementById("home")
 const cart = document.getElementById("cart")
+const turnOnSound = document.getElementById("sound-btn")
+
+let isPlaying = false
 
 // nav
 home.addEventListener("click", function () {
@@ -21,12 +24,21 @@ cartQuantity.addEventListener("click",function(){
 // other features
 let inReview = false
 
-document.addEventListener("click", async function (e) {
-    e.preventDefault()
-    await sound.play()
+turnOnSound.addEventListener("click", async function () {
+    if(!isPlaying){
+        turnOnSound.innerHTML = "volume_up"
+        isPlaying = true
+        sound.play()
+    }
+    else{
+        turnOnSound.innerHTML = "volume_off"
+        isPlaying = false
+        sound.pause()
+    }
 })
 // review product
 function moveToReview(item,i){
+    console.log(i)
     if (item.type == "original") {
         addToReview(true, i)
     }
@@ -36,12 +48,14 @@ function moveToReview(item,i){
 
     window.location.href = "../pages/review.html"
 }
-// add to cart 
+// SET STORAGE FOR USER REVIEW
 function addToReview(original,i) {
     let userReview
     if (original) {
         userReview ={
-            productIndex:i,
+            type: "original",
+            id: products[i].id,
+            productIndex: i,
             name: products[i].name,
             img: products[i].img,
             price: products[i].price,
@@ -53,6 +67,8 @@ function addToReview(original,i) {
     }
     else {
         userReview ={
+            type: "added",
+            id: userAddedProducts[i].id,
             productIndex: i,
             name: userAddedProducts[i].name,
             img: userAddedProducts[i].img,

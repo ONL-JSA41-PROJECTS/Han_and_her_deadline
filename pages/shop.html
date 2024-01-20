@@ -18,7 +18,7 @@
     
     <div id="container">
         <div id="topper" class="red">
-            <p id="guide">Click anywhere to enable sound</p>
+            <span id="sound-btn" class="material-symbols-outlined">volume_off</span>
            
             <span id="home" class="material-symbols-outlined">home</span>
             <span id="cart" class="material-symbols-outlined">shopping_cart</span>
@@ -39,7 +39,7 @@
         </ul>
 
         <select name="" id="price-arrange">
-            <option value="default">Default price arrange</option>
+            <option value="default">Default price sorting</option>
             <option value="low-to-high">Low to High</option>
             <option value="high-to-low">High to Low</option>
             <option value="free">Free</option>
@@ -48,10 +48,11 @@
         <div id="list">
         </div>
         <br><br>
+
     </div>
     
-
-    <audio id="sound" src="../assets/y2mate.com - 인생의 회전목마 Merry Go Round of Life  하울의 움직이는 성 Howls Moving Castle  Violin Cover.mp3"></audio>
+    <audio id="ding" src="../assets/ding.wav"></audio>
+    <audio id="sound" src="../assets/the world we knew.mp3"></audio>
     <script src="../datas/productList.js"></script>
     <script src="../jsFiles/installProducts.js"></script>
     <script src="../jsFiles/run.js"></script>

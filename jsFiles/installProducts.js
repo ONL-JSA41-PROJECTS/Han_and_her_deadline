@@ -1,4 +1,5 @@
 let userAddedProducts = JSON.parse(sessionStorage.getItem("addedProducts")) || []
+let addedPurchasesList = JSON.parse(sessionStorage.getItem("addedPurchasesItems")) || []
 const accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
 const account = JSON.parse(localStorage.getItem("currentAccount")) || {}
 
@@ -6,15 +7,21 @@ const cartQuantity = document.getElementById("cart-quantity")
 const nav = document.getElementById("nav")
 const choices = nav.querySelectorAll("li")
 const priceArrangeSelect = document.getElementById("price-arrange")
+const dingSound = document.getElementById("ding")
 let chosen = nav.querySelector(".chosen")
 
 priceArrangeSelect.value = "default"
 
-if (account.cart.length <= 9) {
-        cartQuantity.innerHTML = account.cart.length
+if (account.cart) {
+        if (account.cart.length <= 9) {
+                cartQuantity.innerHTML = account.cart.length
+        }
+        else {
+                cartQuantity.innerHTML = "9<sub>+</sub>"
+        }
 }
 else {
-        cartQuantity.innerHTML = "9<sub>+</sub>"
+        cartQuantity.innerHTML = "0<sub>-</sub>"
 }
 
 loadChoice()
@@ -176,14 +183,14 @@ function loadNewest() {
         let today = new Date()
 
         if (priceArrangeSelect.value == "default") {
-                for (let product of products) {
-                        if (Date.parse(product.publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                createProductHTML(product)
+                for (let i in products) {
+                        if (Date.parse(products[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
+                                createProductHTML(products[i],i)
                         }
                 }
-                for (let product of userAddedProducts) {
-                        if (Date.parse(product.publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                createProductHTML(product)
+                for (let i in userAddedProducts) {
+                        if (Date.parse(userAddedProducts[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
+                                createProductHTML(userAddedProducts[i],i)
                         }
                 }
 
@@ -196,17 +203,17 @@ function loadNewest() {
         }
         else if (priceArrangeSelect.value == "free") {
 
-                for (let product of products) {
-                        if (product.price == 0) {
-                                if (Date.parse(product.publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                        createProductHTML(product)
+                for (let i in products) {
+                        if (products[i].price == 0) {
+                                if (Date.parse(products[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
+                                        createProductHTML(products[i],i)
                                 }
                         }
                 }
-                for (let product of userAddedProducts) {
-                        if (product.price == 0) {
-                                if (Date.parse(product.publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                        createProductHTML(product)
+                for (let i in userAddedProducts) {
+                        if (userAddedProducts[i].price == 0) {
+                                if (Date.parse(userAddedProducts[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
+                                        createProductHTML(product,i)
                                 }
                         }
                 }
@@ -227,7 +234,7 @@ function loadNewest() {
                                 if (products[i].price == price) {
                                         if (isAdded.indexOf(products[i].name) == -1) {
                                                 if (Date.parse(products[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                                        createProductHTML(products[i])
+                                                        createProductHTML(products[i],i)
                                                         isAdded.push(products[i].name)
                                                 }
                                         }
@@ -243,19 +250,12 @@ function loadNewest() {
                                 if (userAddedProducts[i].price == price) {
                                         if (isAdded.indexOf(userAddedProducts[i].name) == -1) {
                                                 if (Date.parse(product.publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                                        createProductHTML(product)
+                                                        createProductHTML(userAddedProducts[i],i)
                                                         isAdded.push(userAddedProducts[i].name)
                                                 }
                                         }
                                 }
                         }
-                }
-
-                // NO NEWEST PRODUCT MESSAGE
-                if (!list.querySelector(".col")) {
-                        let p = document.createElement("p")
-                        p.innerHTML = "We're very sorry! We haven't updated this category yet."
-                        list.appendChild(p)
                 }
         }
         else if (priceArrangeSelect.value == "low-to-high") {
@@ -267,7 +267,7 @@ function loadNewest() {
                                 if (products[i].price == price) {
                                         if (isAdded.indexOf(products[i].name) == -1) {
                                                 if (Date.parse(products[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                                        createProductHTML(products[i])
+                                                        createProductHTML(products[i],i)
                                                         isAdded.push(products[i].name)
                                                 }
                                         }
@@ -282,29 +282,179 @@ function loadNewest() {
                         for (let i in userAddedProducts) {
                                 if (userAddedProducts[i].price == price) {
                                         if (isAdded.indexOf(userAddedProducts[i].name) == -1) {
-                                                if (Date.parse(product.publish_date) >= Date.parse(today) - 14 * 86400000) {
-                                                        createProductHTML(product)
+                                                if (Date.parse(userAddedProducts[i].publish_date) >= Date.parse(today) - 14 * 86400000) {
+                                                        createProductHTML(userAddedProducts[i],i)
                                                         isAdded.push(userAddedProducts[i].name)
                                                 }
                                         }
                                 }
                         }
                 }
-
-                // NO NEWEST PRODUCT MESSAGE
-                if (!list.querySelector(".col")) {
-                        let p = document.createElement("p")
-                        p.innerHTML = "We're very sorry! We haven't updated this category yet."
-                        list.appendChild(p)
-                }
+        }
+        // NO NEWEST PRODUCT MESSAGE
+        if (!list.querySelector(".col")) {
+                let p = document.createElement("p")
+                p.innerHTML = "We're very sorry! We haven't updated this category yet."
+                list.appendChild(p)
         }
 }
 
 function loadCommon() {
-        try {
-                console.log(iei) //NEED UPDATE
+        if (addedPurchasesList[0]) {
+                let sorted = addedPurchasesList.map(x => x.purchases).sort().reverse()
+
+                let limit
+                if (sorted.length < 10) {
+                        limit = sorted.length - 1
+                }
+                else {
+                        limit = 10
+                }
+
+
+                if (priceArrangeSelect.value == "default") {
+                        for (let product of addedPurchasesList) {
+                                if (product.purchases >= sorted[limit]) {
+                                        console.log(product)
+                                        for (let i in products) {
+                                                if (products[i].id == product.id) {
+                                                        createProductHTML(products[i], i)
+                                                }
+                                        }
+                                        for (let i in userAddedProducts) {
+                                                if (userAddedProducts[i].id == product.id) {
+                                                        createProductHTML(userAddedProducts[i], i)
+                                                }
+                                        }
+                                }
+                        }
+                }
+                else if (priceArrangeSelect.value == "high-to-low") {
+                        let priceSorted = products.map(x => x.price).sort().reverse()
+                        let isAdded = []
+                        let connect = []
+
+                        for (let price of priceSorted) {
+                                for (let product of addedPurchasesList) {
+                                        if (product.purchases >= sorted[limit]) {
+                                        
+                                                for (let i in products) {
+                                                        if (isAdded.indexOf(products[i].name) == -1) {
+                                                                if (products[i].price == price) {
+                                                                        if (products[i].id == product.id) {
+                                                                                isAdded.push(products[i].name)
+                                                                        }
+
+                                                                }
+                                                        }
+
+                                                }
+                                        }
+                                }
+                        }
+                        priceSorted = userAddedProducts.map(x => x.price).sort().reverse()
+
+                        for (let price of priceSorted) {
+                                for (let product of addedPurchasesList) {
+                                        if (product.purchases >= sorted[limit]) {
+                                                for (let i in userAddedProducts) {
+                                                        if (isAdded.indexOf(userAddedProducts[i].name) == -1) {
+                                                                if (userAddedProducts[i].price == price) {
+                                                                        if (userAddedProducts[i].id == product.id) {
+                                                                                createProductHTML(userAddedProducts[i], i)
+                                                                                isAdded.push(userAddedProducts[i].name)
+                                                                        }
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+                else if (priceArrangeSelect.value == "low-to-high") {
+                        let priceSorted = products.map(x => x.price).sort()
+                        let isAdded = []
+
+                        for (let price of priceSorted) {
+                                for (let product of addedPurchasesList) {
+                                        if (product.purchases >= sorted[limit]) {
+                                                for (let i in products) {
+                                                        if (isAdded.indexOf(products[i].name) == -1) {
+                                                                if (products[i].price == price) {
+                                                                        if (products[i].id == product.id) {
+                                                                                createProductHTML(products[i], i)
+                                                                                isAdded.push(products[i].name)
+                                                                        }
+
+                                                                }
+                                                        }
+
+                                                }
+                                        }
+                                }
+                        }
+                        priceSorted = userAddedProducts.map(x => x.price).sort()
+
+                        for (let price of priceSorted) {
+                                for (let product of addedPurchasesList) {
+                                        if (product.purchases >= sorted[limit]) {
+                                                for (let i in userAddedProducts) {
+                                                        if (isAdded.indexOf(userAddedProducts[i].name) == -1) {
+                                                                if (userAddedProducts[i].price == price) {
+                                                                        if (userAddedProducts[i].id == product.id) {
+                                                                                createProductHTML(userAddedProducts[i], i)
+                                                                                isAdded.push(userAddedProducts[i].name)
+                                                                        }
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                }
+                else if (priceArrangeSelect.value == "free") {
+                        let isAdded = []
+
+                        for (let i in products) {
+                                for (let product of addedPurchasesList) {
+                                        if (product.purchases >= sorted[limit]) {
+                                                if (isAdded.indexOf(products[i].name) == -1) {
+                                                        if (products[i].price == 0) {
+                                                                if (products[i].id == product.id) {
+                                                                        createProductHTML(products[i], i)
+                                                                        isAdded.push(products[i].name)
+                                                                }
+
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+
+
+                        for (let i in userAddedProducts) {
+                                for (let product of addedPurchasesList) {
+                                        if (product.purchases >= sorted[limit]) {
+                                                if (isAdded.indexOf(userAddedProducts[i].name) == -1) {
+                                                        if (userAddedProducts[i].price == 0) {
+                                                                if (userAddedProducts[i].id == product.id) {
+                                                                        createProductHTML(userAddedProducts[i], i)
+                                                                        isAdded.push(userAddedProducts[i].name)
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
+                        if (!list.querySelector(".col")) {
+                                let p = document.createElement("p")
+                                p.innerHTML = "There isn't any common free product."
+                                list.appendChild(p)
+                        }
+
+                }
         }
-        catch {  // CANT LOAD COMMON PRODUCTS MESSAGE
+        else {  // CANT LOAD COMMON PRODUCTS MESSAGE
                 let p = document.createElement("p")
                 p.innerHTML = "We're very sorry! We haven't updated this category yet."
                 list.appendChild(p)
@@ -336,16 +486,28 @@ function createProductHTML(product, i) {
 
         let pic = document.createElement("img")
         pic.src = product.img
-        pic.onclick = function () { moveToReview(product, i) }
+        pic.onclick = function () {
+                moveToReview(product, i)
+        }
+
         content.appendChild(pic)
 
         let describe = document.createElement("span")
 
-        if (product.describe.length <= 80) {
-                describe.innerHTML = " - " + product.describe
+        let purchasesListIndex = addedPurchasesList.findIndex(elm => elm.id == product.id)
+        let purchases
+        if (purchasesListIndex == -1) {
+                purchases = 0
         }
         else {
-                describe.innerHTML = " - " + product.describe.slice(0, 77) + "..."
+                purchases = addedPurchasesList[purchasesListIndex].purchases
+        }
+
+        if (product.describe.length <= 35) {
+                describe.innerHTML = "<br> - " + product.describe + " -<br><br><b> Purchases: " + purchases + "<br>" + addSpaceForPrice((product.price * 1000).toString()) + "&ensp;vnđ</b>"
+        }
+        else {
+                describe.innerHTML = "<br> - " + product.describe.slice(0, 32) + "..." + "<br><br><b> Purchases: " + purchases + "<br>" + addSpaceForPrice((product.price * 1000).toString()) + "&ensp;vnđ</b"
         }
 
         describe.appendChild(quickAddToCartBtn)
@@ -357,6 +519,7 @@ function createProductHTML(product, i) {
 }
 
 function addToCart(reviewItem) {
+        dingSound.play()
         // get product's current quantity
         let temp = 0
 
@@ -380,8 +543,8 @@ function addToCart(reviewItem) {
 
                 // add chosen item into user cart
                 if (index == -1) {
-                        console.log(reviewItem.shop)
                         accountsList[accountIndex].cart.push({
+                                id: reviewItem.id,
                                 name: reviewItem.name,
                                 img: reviewItem.img,
                                 price: reviewItem.price,
@@ -393,6 +556,7 @@ function addToCart(reviewItem) {
                         })
 
                         account.cart.push({
+                                id: reviewItem.id,
                                 name: reviewItem.name,
                                 img: reviewItem.img,
                                 price: reviewItem.price,
@@ -422,4 +586,18 @@ function addToCart(reviewItem) {
                 window.location.href = "../pages/login.html"
                 alert("Please sign in to add this item into your cart")
         }
+}
+
+
+// ADD DOT FOR EVERY 3 UNITS
+function addSpaceForPrice(str) {
+        let newstr = ""
+
+        while (str.length > 3) {
+                newstr = "." + str.slice(-3) + newstr
+                str = str.slice(0, -3)
+        }
+        newstr = str + newstr
+
+        return newstr
 }

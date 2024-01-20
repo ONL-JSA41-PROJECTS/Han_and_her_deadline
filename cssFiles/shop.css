@@ -3,9 +3,13 @@ body{
     overflow-x: hidden;
     transition: all 0.5s;
 }
-#guide{
-    font-family: athene;
+#sound-btn{
     font-weight: bold;
+    margin-left: 30px;
+    padding: 12px;
+    border-radius: 100px;
+    background-color: white;
+    font-size: 30px;
 }
 #nav{
     list-style-type: none;
@@ -58,7 +62,7 @@ body{
     background-color: white;
     border-radius: 100px;
     width: 3%;
-    height: 60%;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,7 +72,7 @@ body{
     background-color: white;
     border-radius: 100px;
     width: 3%;
-    height: 60%;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,11 +81,11 @@ body{
     z-index: 0;
     position: sticky;
     top: 10px;
-    margin-left: -18vw;
+    margin-left: -340px;
     background-color: rgb(215, 211, 211);
     border-radius: 0 100px 100px 0;
     width: 85px;
-    height: 47px;
+    height: 46px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +116,7 @@ body{
     color: #505050;
     position: relative;
     cursor: pointer;
-    height: 42vh;
+    height: 300px;
     width: 210px;
     display: flex;
     justify-content: space-evenly;
@@ -158,6 +162,10 @@ body{
     font-family: vollkorn;
     transition: all 1s;
 }
+.infor span b{
+    opacity: 0;
+    transition: all 1s;
+}
 .col hr{
     width: 95%;
     border: 2px solid #505050;
@@ -195,6 +203,9 @@ body{
     width: 45%;
     height: 97.7%;
     text-align:unset;
+}
+.col:hover .infor span b{
+    opacity: 1;
 }
 .col:hover img{
     width: 48%;

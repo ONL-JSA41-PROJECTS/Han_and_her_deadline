@@ -147,6 +147,20 @@ function userShopsLoad(li) {
             // add into shop review page
             container.onclick = function () { loadShopInside(shop) }
 
+            let x = document.createElement("span")
+            x.innerHTML = "x"
+            x.style.cssText = "cursor: pointer; color: white; font-family: arial; z-index: 5; position: absolute; top :5px; left: 10px; font-size: 20px;"
+            x.onclick = function(){
+                accountsList[index].shops.splice(accountsList[index].shops.indexOf(shop),1)
+                account.shops.splice(account.shops.indexOf(shop),1)
+
+                localStorage.setItem("currentAccount",JSON.stringify(account))
+                localStorage.setItem("userAccounts",JSON.stringify(accountsList))
+
+                location.reload()
+            }
+            container.appendChild(x)
+
             let shopName = document.createElement("p")
             shopName.innerHTML = shop.name
             container.appendChild(shopName)
@@ -375,10 +389,24 @@ function loadShopInside(shop) {
     if (shop.products && shop.products[0]) {
         let productsContainer = document.createElement("div")
         productsContainer.id = "shops-list"
-
+        console.log(account.shops[account.shops.indexOf(shop)])
         for (let product of shop.products) {
             let container = document.createElement("div")
             container.classList.add("darkgrey", "shop-container")
+
+            let x = document.createElement("span")
+            x.innerHTML = "x"
+            x.style.cssText = "cursor: pointer; color: white; font-family: arial; z-index: 5; position: absolute; top :5px; left: 10px; font-size: 20px;"
+            x.onclick = function(){
+                account.shops[account.shops.indexOf(shop)].products.splice(product,1)
+                accountsList[index] =  account
+
+                localStorage.setItem("currentAccount",JSON.stringify(account))
+                localStorage.setItem("userAccounts",JSON.stringify(accountsList))
+
+                location.reload()
+            }
+            container.appendChild(x)
 
             let productName = document.createElement("p")
             productName.innerHTML = product.name
@@ -460,6 +488,7 @@ function createProduct(shopIndex) {
         let date = new Date()
 
         productsList.push({
+            id: productName.value.slice(0,3).toUpperCase() + Math.random()* 999,
             name: productName.value,
             info: productDescribe.value,
             price:productPrice.value,
@@ -478,34 +507,3 @@ function createProduct(shopIndex) {
 
     textInfo.appendChild(form)
 }
-
-// ADD USER PRODUCTS && SHOPS INTO SHOP PAGE
-function addAll() {
-    let accounts = JSON.parse(localStorage.getItem("userAccounts"))
-    let userAddedProducts = []
-
-    try{
-        for (let account of accounts) {
-            for (let shop of account.shops) {
-                for (let product of shop.products) {
-                    
-                    userAddedProducts.push({
-                        name: product.name,
-                        describe: product.info,
-                        img: product.img,
-                        price: product.price || 0,
-                        shop: shop.name,
-                        shopImg: shop.cover,
-                        publish_date: product.publish_date,
-                        more: shop.info,
-                    })
-                }
-            }
-        }
-    }
-    catch(err){}
-    console.log(userAddedProducts)
-
-    sessionStorage.setItem("addedProducts",JSON.stringify(userAddedProducts))
-}
-addAll()

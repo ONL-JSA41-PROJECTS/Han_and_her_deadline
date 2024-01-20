@@ -49,8 +49,10 @@ function createItemBlock(){
         x.innerHTML="x"
         x.addEventListener("click",function(){
             container.removeChild(block)
+            
             accountsList[index].cart.splice(accountsList[index].cart.indexOf(item),1)
             account.cart.splice(account.cart.indexOf(item),1)
+
             localStorage.setItem("userAccounts",JSON.stringify(accountsList))
             localStorage.setItem("currentAccount",JSON.stringify(account))
         })

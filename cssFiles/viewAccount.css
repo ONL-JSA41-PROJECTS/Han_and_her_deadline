@@ -236,6 +236,7 @@ textarea {
 }
 
 .shop-container {
+    position: relative;
     cursor: pointer;
     font-family: merchant;
     font-size: 30px;

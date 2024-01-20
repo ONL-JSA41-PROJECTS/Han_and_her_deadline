@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Review</title>
     <link rel="stylesheet" href="../cssFiles/colors&fonts.css">
+    <link rel="stylesheet" href="../cssFiles/shopReview.css">
     <link rel="shortcut icon" href="../assets/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
-    
+<body class="white">
+    <div style="margin-left: 83vw; height: 25vh;" class="red top-square"></div>
+    <div style="margin-left: 91vw; height: 15vh;" class="red top-square"></div>
+
+    <span id="cart" class="material-symbols-outlined red">shopping_cart</span>
+    <b id="cart-quantity" class="darkYellow">1</b>
+    <span id="home" class="material-symbols-outlined red">home</span>
+
+    <div id="products-container" class="darkgrey"></div>
+
+    <audio id="ding" src="../assets/ding.wav"></audio>
+
+    <script src="../datas/productList.js"></script>
     <script src="../jsFiles/shopReview.js"></script>
 </body>
 </html>

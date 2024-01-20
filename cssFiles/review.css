@@ -4,6 +4,7 @@ body{
     overflow-x: hidden;
 }
 #container{
+    z-index: 0;
     position: relative;
     display: flex;
     justify-content: center;
@@ -135,15 +136,18 @@ hr{
     font-family: vollkorn;
 }
 #shop-info{
+    cursor: pointer;
     max-width: 300px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    left: 100px;
-    top: -80px;
+    position: fixed;
+    z-index: 8;
+    font-family: vollkorn;
+    margin: 10px 0 0 10px;
 }
+
 #shop-img{
     margin: 5px 0 5px 15px;
     width: 50px;
@@ -153,6 +157,7 @@ hr{
     border: 3px solid black;
 }
 #shop-name{
+    padding: 0 10px;
     font-weight: bold;
     color: rgb(56, 56, 56);
     text-decoration: underline;
@@ -244,10 +249,15 @@ hr{
     align-items: center;
     flex-direction: column;
 }
-#rate-form input{
+#rate-form input[type="text"]{
     padding: 10px 20px;
     border: none;
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 10px;
+}
+#rate-form input[type="submit"]{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
 }
 .chosen{
     color: white;
