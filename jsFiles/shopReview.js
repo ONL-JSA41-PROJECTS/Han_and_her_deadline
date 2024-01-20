@@ -13,7 +13,7 @@ console.log(reviewingShop)
 document.title = reviewingShop.shop || "No shop to review"
 
 
-cartQuantity.innerHTML = account.cart.length
+cartQuantity.innerHTML = account.cart.length || 0
 
 cart.addEventListener("click", function () {
     window.location.href = "../pages/cart.html"
