@@ -38,7 +38,6 @@ turnOnSound.addEventListener("click", async function () {
 })
 // review product
 function moveToReview(item,i){
-    console.log(i)
     if (item.type == "original") {
         addToReview(true, i)
     }

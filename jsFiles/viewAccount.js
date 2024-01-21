@@ -7,6 +7,7 @@ const changeInfoTab = document.getElementById("change-info-tab")
 const mainInput = document.getElementById("text-input")
 const notification = document.getElementById("custom-alert")
 
+
 let index = accountsList.findIndex(acc => acc.name == account.name && acc.pass == account.pass)
 let liList = document.getElementById("tab").querySelectorAll("li")
 avt.src = account.avt || "https://i.pinimg.com/originals/bc/d8/39/bcd83978d462922ddbd4dcc0b5cedc02.jpg"
@@ -43,6 +44,7 @@ avtInput.addEventListener("change", function () {
     })
 })
 
+// WAIT
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // ALERT
 async function notice(content, reload) {
@@ -94,7 +96,7 @@ function personalInfoLoad(li) {
         let changePassBtn = document.createElement("p")
         changePassBtn.innerHTML = "Change password?"
         changePassBtn.classList.add("change-pass-btn")
-        changePassBtn.onclick = async function () {
+        changePassBtn.onclick = function () {
             changePass()
         }
 
@@ -150,12 +152,12 @@ function userShopsLoad(li) {
             let x = document.createElement("span")
             x.innerHTML = "x"
             x.style.cssText = "cursor: pointer; color: white; font-family: arial; z-index: 5; position: absolute; top :5px; left: 10px; font-size: 20px;"
-            x.onclick = function(){
-                accountsList[index].shops.splice(accountsList[index].shops.indexOf(shop),1)
-                account.shops.splice(account.shops.indexOf(shop),1)
+            x.onclick = function () {
+                accountsList[index].shops.splice(accountsList[index].shops.indexOf(shop), 1)
+                account.shops.splice(account.shops.indexOf(shop), 1)
 
-                localStorage.setItem("currentAccount",JSON.stringify(account))
-                localStorage.setItem("userAccounts",JSON.stringify(accountsList))
+                localStorage.setItem("currentAccount", JSON.stringify(account))
+                localStorage.setItem("userAccounts", JSON.stringify(accountsList))
 
                 location.reload()
             }
@@ -245,6 +247,8 @@ function hideChangeInfoTab() {
 
 // CHECK IF THE PASSWORD IS CORRECT THEN DISPLAY IT
 function checkUser(visiblePassBtn, passContainer) {
+
+    mainInput.value = ""
     changeInfoTab.querySelector("p").innerHTML = "Enter your password"
 
     if (visiblePassBtn.innerHTML != "visibility") {
@@ -257,10 +261,11 @@ function checkUser(visiblePassBtn, passContainer) {
                 passContainer.innerHTML = "<b>Password: </b> &ensp;" + account.pass + "&ensp;"
                 visiblePassBtn.innerHTML = "visibility"
                 passContainer.appendChild(visiblePassBtn)
+
             }
             else {
                 hideChangeInfoTab()
-                notice("Wrong password", false)
+                notice("Wrong password", true)
             }
         })
     }
@@ -269,7 +274,6 @@ function checkUser(visiblePassBtn, passContainer) {
         passContainer.innerHTML = "<b>Password: </b> &ensp;" + "*".repeat(account.pass.length) + "&ensp;"
         passContainer.appendChild(visiblePassBtn)
     }
-
 }
 
 // CHANGE CURRENT ACCOUNT PASSWORD
@@ -277,13 +281,15 @@ function changePass() {
     changeInfoTab.style.display = "flex"
     changeInfoTab.querySelector("p").innerHTML = `Enter your old password<span onclick="hideChangeInfoTab()">x</span>`
 
-    changeInfoTab.querySelector("form").addEventListener("submit", function (e) {
+    changeInfoTab.querySelector("form").addEventListener("submit", async function (e) {
         e.preventDefault()
+
         if (mainInput.value == account.pass) {
+            changeInfoTab.style.display = "flex"
             changeInfoTab.querySelector("p").innerHTML = `Enter your new password<span onclick="hideChangeInfoTab()">x</span>`
 
-            changeInfoTab.querySelector("form").addEventListener("submit", async function () {
-                console.log(mainInput.value)
+            changeInfoTab.querySelector("form").addEventListener("submit",async function () {
+    
                 if (mainInput.value.trim() != 0 && mainInput.value != account.pass) {
                     account.pass = mainInput.value
                     accountsList[index].pass = mainInput.value
@@ -295,6 +301,7 @@ function changePass() {
                     notice("Change password successfully!", true)
                 }
                 else {
+                    await sleep(1500)
                     notice("No change was applied!", true)
                     hideChangeInfoTab()
                 }
@@ -347,7 +354,7 @@ function createShop() {
     form.appendChild(shopAvtInput)
 
     let label = document.createElement("label")
-    label.setAttribute("for","shop-avt-input")
+    label.setAttribute("for", "shop-avt-input")
     label.style.cssText = "cursor:pointer; color: white;"
     label.innerHTML = '<span class="material-symbols-outlined">attach_file</span>'
     form.appendChild(label)
@@ -397,12 +404,12 @@ function loadShopInside(shop) {
             let x = document.createElement("span")
             x.innerHTML = "x"
             x.style.cssText = "cursor: pointer; color: white; font-family: arial; z-index: 5; position: absolute; top :5px; left: 10px; font-size: 20px;"
-            x.onclick = function(){
-                account.shops[account.shops.indexOf(shop)].products.splice(product,1)
-                accountsList[index] =  account
+            x.onclick = function () {
+                account.shops[account.shops.indexOf(shop)].products.splice(product, 1)
+                accountsList[index] = account
 
-                localStorage.setItem("currentAccount",JSON.stringify(account))
-                localStorage.setItem("userAccounts",JSON.stringify(accountsList))
+                localStorage.setItem("currentAccount", JSON.stringify(account))
+                localStorage.setItem("userAccounts", JSON.stringify(accountsList))
 
                 location.reload()
             }
@@ -472,7 +479,7 @@ function createProduct(shopIndex) {
     form.appendChild(productImgInput)
 
     let label = document.createElement("label")
-    label.setAttribute("for","product-img-input")
+    label.setAttribute("for", "product-img-input")
     label.style.cssText = "cursor:pointer; color: white;"
     label.innerHTML = '<span class="material-symbols-outlined">attach_file</span>'
     form.appendChild(label)
@@ -484,15 +491,15 @@ function createProduct(shopIndex) {
     form.onsubmit = function (e) {
         e.preventDefault()
         let productsList = JSON.parse(localStorage.getItem("currentAccount")).shops[index].products || []
-        
+
         let date = new Date()
 
         productsList.push({
-            id: productName.value.slice(0,3).toUpperCase() + Math.random()* 999,
+            id: productName.value.slice(0, 3).toUpperCase() + Math.random() * 999,
             name: productName.value,
             info: productDescribe.value,
-            price:productPrice.value,
-            publish_date:date.toLocaleDateString(),
+            price: productPrice.value,
+            publish_date: date.toLocaleDateString(),
             img: url
         })
 

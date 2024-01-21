@@ -228,7 +228,7 @@ for (let i = 0; i < stars.length; i++) {
 }
 
 function returnProductName(name) {
-    if (name == "Wine Connoiseurs Original"){
+    if (name == "Wine Connoiseurs"){
         return products[reviewItem.productIndex].name
     }
     return userAddedProducts[reviewItem.productIndex].name
@@ -247,7 +247,7 @@ rateForm.addEventListener("submit", function (e) {
     if (input.value != "" && input.value != " ") {
         comments.push({
             content: input.value,
-            productName: returnProductName(reviewItem.shopName),
+            productName: returnProductName(reviewItem.shop),
             rate: document.getElementsByClassName("checked").length - 5,
             name: account.name,
             avt: account.avt,
@@ -266,7 +266,8 @@ rateForm.addEventListener("submit", function (e) {
 // VISIBLE COMMENTS
 const visibleRate = document.getElementById("visible-rate")
 let choices = document.getElementsByClassName("choice")
-
+comments = JSON.parse(localStorage.getItem("commentsList"))
+console.log(comments)
 // set default
 choices[0].classList.add("chosen")
 for (let com of comments) {
@@ -278,7 +279,6 @@ for (let com of comments) {
 
 
 function createMessages(comment) {
-
     let container = document.createElement("div")
     container.classList.add("message")
 
@@ -287,7 +287,13 @@ function createMessages(comment) {
     container.appendChild(messContent)
 
     let avt = document.createElement("div")
-    avt.style.backgroundImage = `url(${comment.avt})`
+    if(comment.avt){
+        avt.style.backgroundImage = `url(${comment.avt})`
+    }
+    else{
+        avt.style.backgroundImage = `url(https://i.pinimg.com/originals/bc/d8/39/bcd83978d462922ddbd4dcc0b5cedc02.jpg)`
+    }
+
     avt.classList.add("avt")
     container.appendChild(avt)
 
