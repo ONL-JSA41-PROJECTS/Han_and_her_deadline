@@ -1,16 +1,25 @@
-const list = document.getElementById("list")
-let currentAccount = JSON.parse(localStorage.getItem("currentAccount")) || {}
+let addedPurchasesList = JSON.parse(sessionStorage.getItem("addedPurchasesItems")) || []
+const account = JSON.parse(localStorage.getItem("currentAccount")) || {}
+const accountsList = JSON.parse(localStorage.getItem("userAccounts")) || []
+let userAddedProducts = JSON.parse(sessionStorage.getItem("addedProducts")) || []
 const beforeDiscount = document.getElementById("before-discount")
 const amount = document.getElementById("total")
 const vouchers = document.getElementById("vouchers")
 const table = document.getElementById("table")
-const minus= document.getElementById("minus")
+const minus = document.getElementById("minus")
+const payForm = document.getElementById("form")
+const paymentInfo = document.getElementById("customer-payment-info")
+const cancel = document.getElementById("cancel")
+const payMethod = document.getElementById("pay-method")
+
+let index = accountsList.findIndex(elm => elm.name == account.name && elm.pass == account.pass)
+
 let Total = 0
 let discount = 0
 let move = false
 
-if (currentAccount) {
-    const cart = currentAccount.cart || []
+if (account) {
+    const cart = account.cart || []
 
     for (let item of cart) {
         let container = document.createElement("tr")
@@ -20,15 +29,15 @@ if (currentAccount) {
         container.appendChild(itemName)
 
         let itemQuantity = document.createElement("td")
-        itemQuantity.style.textAlign="center"
+        itemQuantity.style.textAlign = "center"
         itemQuantity.innerHTML = item.quantity
         container.appendChild(itemQuantity)
 
         let price = document.createElement("td")
-        price.style.textAlign="end"
+        price.style.textAlign = "end"
         let tempPrice = item.price * 1000 * item.quantity
         Total += tempPrice
-        price.innerHTML = addSpaceForPrice(tempPrice.toString())+ "vnd"
+        price.innerHTML = addSpaceForPrice(tempPrice.toString()) + "vnd"
         container.appendChild(price)
 
         table.appendChild(container)
@@ -64,14 +73,14 @@ let cards = vouchers.querySelectorAll(".voucher")
 for (let card of cards) {
 
     card.addEventListener("click", function () {
- 
+
         if (!move) {
             move = true
         }
         else {
             move = false
         }
-        
+
         moveObj(card, move)
     })
 }
@@ -79,22 +88,22 @@ for (let card of cards) {
 
 function moveObj(obj, move) {
 
-    obj.addEventListener("click",function(){
+    obj.addEventListener("click", function () {
         move = false
-        if(obj.getBoundingClientRect().left > list.getBoundingClientRect().left && obj.getBoundingClientRect().right < list.getBoundingClientRect().right){
-            if(obj.getBoundingClientRect().top > list.getBoundingClientRect().top && obj.getBoundingClientRect().bottom < list.getBoundingClientRect().bottom){
-                discount = (100 - (obj.querySelector("span").innerHTML.slice(obj.querySelector("span").length,2))) /100
- 
+        if (obj.getBoundingClientRect().left > list.getBoundingClientRect().left && obj.getBoundingClientRect().right < list.getBoundingClientRect().right) {
+            if (obj.getBoundingClientRect().top > list.getBoundingClientRect().top && obj.getBoundingClientRect().bottom < list.getBoundingClientRect().bottom) {
+                discount = (100 - (obj.querySelector("span").innerHTML.slice(obj.querySelector("span").length, 2))) / 100
+
                 minus.innerHTML = "-" + addSpaceForPrice((Total - Math.round(Total * discount)).toString()) + " vnd"
                 Total = Math.round(Total * discount)
-   
+
                 amount.innerHTML = `<b>Total: </b>${addSpaceForPrice(Total.toString())}` + " vnd"
                 obj.style.display = "none"
             }
         }
-        else{
+        else {
             obj.style.position = "relative"
-            obj.style.margin= "10px 0"
+            obj.style.margin = "10px 0"
             obj.style.top = "0"
             obj.style.left = "0"
         }
@@ -116,14 +125,83 @@ function moveObj(obj, move) {
     })
 }
 
-function addSpaceForPrice(str){
+function addSpaceForPrice(str) {
     let newstr = ""
 
-    while (str.length>3){
-        newstr = "." + str.slice(-3) + newstr 
-        str = str.slice(0,-3)
+    while (str.length > 3) {
+        newstr = "." + str.slice(-3) + newstr
+        str = str.slice(0, -3)
     }
     newstr = str + newstr
 
     return newstr
 }
+
+// automatically reset payment method
+payMethod.value = "none"
+
+payForm.addEventListener("submit", function (e) {
+    e.preventDefault()
+
+    if (payMethod.value == "after-delivered") {
+        for (let bought of account.cart) {
+            let id = products.findIndex(elm => elm.name == bought.name && elm.img == bought.img)
+
+            if (id >= 0) {
+                let addedIndex = addedPurchasesList.findIndex(elm => elm.id == products[id].id)
+
+                if (addedIndex != -1) {
+                        addedPurchasesList[addedIndex].purchases += 1
+                        sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+                }
+                else {
+                    addedPurchasesList.push({
+                        id:products[id].id,
+                        name: products[id].name,
+                        purchases: 1,
+                    })
+                }
+
+                sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+            }
+            else if (id == -1) {
+                let newId = userAddedProducts.findIndex(elm => elm.name == bought.name && elm.img == bought.img)
+                let addedIndex  = addedPurchasesList.findIndex(elm => elm.id === userAddedProducts[newId].id)
+                console.log(addedIndex)
+
+                if(addedIndex != -1){
+                    addedPurchasesList[addedIndex].purchases += 1
+                    sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+                }
+                else{
+                    addedPurchasesList.push({
+                        id: userAddedProducts[newId].id,
+                        name: userAddedProducts[newId].name,
+                        purchases: 1,
+                    })
+                }
+
+                sessionStorage.setItem("addedPurchasesItems", JSON.stringify(addedPurchasesList))
+            }
+        }
+
+        account.cart = []
+        accountsList[index].cart = []
+
+        localStorage.setItem("currentAccount", JSON.stringify(account))
+        localStorage.setItem("userAccounts", JSON.stringify(accountsList))
+
+        location.reload()
+        alert("Deliver soon")
+    }
+    else if (payMethod.value == "none") {
+        alert("Please choose a method")
+    }
+    else {
+        window.open("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1806000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=DEMOV210&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHash=3e0d61a0c0534b2e36680b3f7277743e8784cc4e1d68fa7d276e79c23be7d6318d338b477910a27992f5057bb1582bd44bd82ae8009ffaf6d141219218625c42", "_blank")
+    }
+})
+
+cancel.addEventListener("click", function () {
+    document.getElementById("address-input").value = ""
+})

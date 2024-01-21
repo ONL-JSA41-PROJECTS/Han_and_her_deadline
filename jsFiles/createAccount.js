@@ -1,4 +1,6 @@
 const form = document.getElementById("form")
+const inputName = document.getElementById("name")
+const inputPass = document.getElementById("pass")
 let isExist = false
 
 form.addEventListener("submit", function (e) {
@@ -44,16 +46,10 @@ try{
     }
     
     window.handleCredentialResponse = (response) => {
-        // decodeJwtResponse() is a custom function defined by you
-        // to decode the credential response.
         const responsePayload = decodeJwtResponse(response.credential);
-    
-        console.log("ID: " + responsePayload.sub);
-        console.log('Full Name: ' + responsePayload.name);
-        console.log('Given Name: ' + responsePayload.given_name);
-        console.log('Family Name: ' + responsePayload.family_name);
-        console.log("Image URL: " + responsePayload.picture);
-        console.log("Email: " + responsePayload.email);
+
+        inputName.value = responsePayload.name
+        inputPass.value = responsePayload.sub
     }
 }
 catch(err){}

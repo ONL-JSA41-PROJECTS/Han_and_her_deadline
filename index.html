@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wine Connoisseur</title>
+    <title>Wine Connoisseurs</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./cssFiles/colors&fonts.css">
     <link rel="shortcut icon" href="./assets/logo.png">
@@ -14,22 +14,14 @@
 </head>
 
 <body class="white">
-    <!-- Messenger Chat Plugin Code -->
+
+    <!-- fb chat -->
     <div id="fb-root"></div>
-
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "156906127516245");
-        chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
     
     <div id="contact">
-        <a href="./assets/zaloQR.jpg"><img src="./assets/zalo-icon.png" alt=""></a>
-        <a href="https://www.facebook.com/profile.php?id=100089121772118&locale=vi_VN"><img
+        <a href="./assets/zaloQR.jpg" target="_blank"><img src="./assets/zalo-icon.png" alt=""></a>
+        <a href="https://www.facebook.com/profile.php?id=61555195028277&locale=vi_VN" target="_blank"><img
                 src="./assets/Facebook_Logo_2023.png" alt=""></a>
     </div>
 
@@ -65,6 +57,8 @@
             <a href="./pages/login.html">
                 Login /Signup
             </a>
+            <div id="userAvt"></div>
+            
             &ensp;
 
             <span class="material-symbols-outlined">logout</span>
@@ -104,6 +98,9 @@
     <iframe id="address"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1271362.7735934507!2d-1.6306862200725174!3d51.51082330000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605c98491bc5b%3A0x2377332215fea206!2sVIDA%20Wines%20and%20Spirits%20UK%20-%20Wine%20Online%20Shop%20UK!5e0!3m2!1svi!2s!4v1703902376606!5m2!1svi!2s"
         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <script src="./jsFiles/test.js"></script>
+    <script src="./jsFiles/chatwfb.js"></script>
     <script src="./jsFiles/index.js"></script>
 </body>
 

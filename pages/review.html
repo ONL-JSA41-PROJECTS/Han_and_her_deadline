@@ -14,13 +14,19 @@
 
 <body class="red">
 
+    <div id="shop-info" class="darkYellow">
+        <img src="" alt="" id="shop-img">
+        <p id="shop-name"></p>
+    </div>
+
+    
     <div id="alert">
         <p>Added to Cart</p>
     </div>
 
     <div id="contact">
-        <a href="../assets/zaloQR.jpg"><img src="../assets/zalo-icon.png" alt=""></a>
-        <a href="https://www.facebook.com/profile.php?id=100089121772118&locale=vi_VN"><img src="../assets/Facebook_Logo_2023.png" alt=""></a>
+        <a href="../assets/zaloQR.jpg" target="_blank"><img src="../assets/zalo-icon.png" alt=""></a>
+        <a href="https://www.facebook.com/profile.php?id=100089121772118&locale=vi_VN" target="_blank"><img src="../assets/Facebook_Logo_2023.png" alt=""></a>
     </div>
 
     <div id="container">
@@ -70,37 +76,51 @@
             </select>
 
             <input type="submit" name="" id="submit" value="Deliver now">
-            <button id="cancel">Cancel</button>
-
         </form>
+        <button id="cancel">Cancel</button>
     </div>
 
-    <div id="comment">
+    <div id="comment" class="lightOrange">
         <h2>Rate it!</h2>
-        <form id="rate-form" action="">
-            <span class="fa fa-star star"></span>
-            <span class="fa fa-star star"></span>
-            <span class="fa fa-star star"></span>
-            <span class="fa fa-star star"></span>
-            <span class="fa fa-star star"></span>
-            <br>
 
-            <input type="text" placeholder="Comment here">
-            <input type="submit" class="red whiteText" value="Enter">
+        <div style="margin: 0 0 10px 70px;">
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+            <span class="fa fa-star star"></span>
+        </div>
+
+        <form id="rate-form" action="">
+            <div class="align-center">
+                <input id="input" type="text" placeholder="Comment here">
+                <input type="submit" class="red whiteText" value="Enter">
+                <input type="file" name="file" id="inputfile" multiple accept="image/*"/>
+                <label for="inputfile"><span class="material-symbols-outlined">attach_file</span>&ensp;</label>
+            </div>
+
+            <div id="rate-img-container"></div>
         </form>
+        
+        <br>
+
         <ul id="rate">
-            <li>See all</li>
-            <li>5 <span class="fa fa-star checked"></span></li>
-            <li>4 <span class="fa fa-star checked"></span></li>
-            <li>3 <span class="fa fa-star checked"></span></li>
-            <li>2 <span class="fa fa-star checked"></span></li>
-            <li>1 <span class="fa fa-star checked"></span></li>
+            <li class="choice">See all</li>
+            <li class="choice">5 <span class="fa fa-star checked"></span></li>
+            <li class="choice">4 <span class="fa fa-star checked"></span></li>
+            <li class="choice">3 <span class="fa fa-star checked"></span></li>
+            <li class="choice">2 <span class="fa fa-star checked"></span></li>
+            <li class="choice">1 <span class="fa fa-star checked"></span></li>
         </ul>
+
+        <br>
+
+        <div id="visible-rate"></div>
     </div>
+    <br><br><br>
 
     <script src="../jsFiles/chatwfb.js"></script>
     <script src="../datas/productList.js"></script>
-    <script src="../datas/commentList.js"></script>
     <script src="../jsFiles/review.js"></script>
 </body>
 

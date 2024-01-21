@@ -1,85 +1,124 @@
+userAddedProducts = JSON.parse(sessionStorage.getItem("addedProducts")) || []
+
 const sound = document.getElementById("sound")
-const items = document.querySelectorAll(".col")
 const topper = document.getElementById("topper")
-const search=document.getElementById("search")
-const searchInput=document.getElementById("searchInput")
-const home=document.getElementById("home")
+const search = document.getElementById("search")
+const searchInput = document.getElementById("searchInput")
+const home = document.getElementById("home")
 const cart = document.getElementById("cart")
+const turnOnSound = document.getElementById("sound-btn")
+
+let isPlaying = false
 
 // nav
-home.addEventListener("click",function(){
-    window.location.href="../index.html"
+home.addEventListener("click", function () {
+    window.location.href = "../index.html"
 })
-cart.addEventListener("click",function(){
-    window.location.href="./cart.html"
+cart.addEventListener("click", function () {
+    window.location.href = "./cart.html"
 })
+cartQuantity.addEventListener("click",function(){
+    window.location.href = "./cart.html"
+})
+
 // other features
 let inReview = false
 
-document.addEventListener("click", async function (e) {
-    e.preventDefault()
-    await sound.play()
+turnOnSound.addEventListener("click", async function () {
+    if(!isPlaying){
+        turnOnSound.innerHTML = "volume_up"
+        isPlaying = true
+        sound.play()
+    }
+    else{
+        turnOnSound.innerHTML = "volume_off"
+        isPlaying = false
+        sound.pause()
+    }
 })
-
 // review product
-for (let i = 0; i< items.length; i++) {
-    items[i].addEventListener("click", function (e) {
-        e.preventDefault()
-        addToReview(i)
-        window.location.href="../pages/review.html"
-    })
-}
+function moveToReview(item,i){
+    if (item.type == "original") {
+        addToReview(true, i)
+    }
+    else {
+        addToReview(false, i)
+    }
 
-// add to cart 
-function addToReview(i){
-    let userReview=
-        {
-            name : products[i].name,
+    window.location.href = "../pages/review.html"
+}
+// SET STORAGE FOR USER REVIEW
+function addToReview(original,i) {
+    let userReview
+    if (original) {
+        userReview ={
+            type: "original",
+            id: products[i].id,
+            productIndex: i,
+            name: products[i].name,
             img: products[i].img,
             price: products[i].price,
             describe: products[i].describe,
-            more: products[i].more
+            more: products[i].more,
+            shopImg: products[i].shopImg,
+            shop: products[i].shop
         }
-    localStorage.setItem("userReview",JSON.stringify(userReview))
+    }
+    else {
+        userReview ={
+            type: "added",
+            id: userAddedProducts[i].id,
+            productIndex: i,
+            name: userAddedProducts[i].name,
+            img: userAddedProducts[i].img,
+            price: userAddedProducts[i].price,
+            describe: userAddedProducts[i].describe,
+            more: userAddedProducts[i].more,
+            shopImg: userAddedProducts[i].shopImg,
+            shop: userAddedProducts[i].shop
+        }
+    }
+
+    localStorage.setItem("userReview", JSON.stringify(userReview))
 }
 
 // search products
-search.addEventListener("click",function(){
+search.addEventListener("click", function () {
     searchItem()
 })
-searchInput.addEventListener("keydown",function(e){
+searchInput.addEventListener("keydown", function (e) {
     searchItem()
 })
 
 // remove unicode, uppercase..
-function normalize(str){
+function normalize(str) {
     return str
-    .toLowerCase()
-    .replace(/[^\x00-\x7F]/g, "");
+        .toLowerCase()
+        .replace(/[^\x00-\x7F]/g, "");
 }
-function searchItem(){
-    let items=document.querySelectorAll(".col")
-    
-    if(searchInput.value != ""){
-        
-        for(let item of items){
-            if(normalize(item.querySelector("p").innerHTML).includes(normalize(searchInput.value))){
-                try{
+function searchItem() {
+    let items = document.querySelectorAll(".col")
+
+    if (searchInput.value.trim() != 0) {
+
+        for (let item of items) {
+            if (normalize(item.querySelector("p").innerHTML).includes(normalize(searchInput.value))) {
+                try {
                     item.classList.remove("hidden")
                 }
-                catch{}
+                catch { }
             }
-            else{
+            else {
                 item.classList.add("hidden")
             }
         }
     }
-    else{
-        for(let item of items){
-            try{
+    else {
+        for (let item of items) {
+            try {
                 item.classList.remove("hidden")
             }
-            catch{}
+            catch { }
         }
     }
 }

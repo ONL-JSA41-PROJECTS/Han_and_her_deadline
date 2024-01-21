@@ -4,6 +4,7 @@ body{
     overflow-x: hidden;
 }
 #container{
+    z-index: 0;
     position: relative;
     display: flex;
     justify-content: center;
@@ -125,7 +126,7 @@ hr{
 }
 #more{
     z-index: -1;
-    position: absolute;
+    position:absolute;
     top: 230px;
     display: flex;
     justify-content: start;
@@ -133,6 +134,33 @@ hr{
     width: 750px;
     min-height: 250px;
     font-family: vollkorn;
+}
+#shop-info{
+    cursor: pointer;
+    max-width: 300px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 8;
+    font-family: vollkorn;
+    margin: 10px 0 0 10px;
+}
+
+#shop-img{
+    margin: 5px 0 5px 15px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 3px solid black;
+}
+#shop-name{
+    padding: 0 10px;
+    font-weight: bold;
+    color: rgb(56, 56, 56);
+    text-decoration: underline;
 }
 #more p{
     font-size: 110%;
@@ -173,6 +201,9 @@ hr{
     color: white;
 }
 #cancel{
+    position: absolute;
+    bottom: -60px;
+    left: 42%;
     cursor: pointer;
     border-radius: 10px;
     padding: 10px 20px;
@@ -180,30 +211,125 @@ hr{
 }
 #comment{
     width: 100vw;
-    height: 30vh;
-    background-color: bisque;
+}
+#comment h2{
+    font-family: athene;
+    margin: 0px 0 0 70px;
+    padding-top: 30px;
 }
 #rate{
+    background-color: blanchedalmond;
+    padding: 20px 0 ;
     font-family: vollkorn;
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
+    height: 5vh;
 }
 #rate li{
     text-align: center;
     padding: 10px 0;
     cursor: pointer;
-    width: 15%;
+    width: calc(100%/4);
 }
 #rate li:hover{
     color: white;
     background-color: rgba(0, 0, 0, 0.827);
 }
+#visible-rate span{
+    color: orange;
+}
 .checked {
     color: orange;
 }
-#rate-form input{
+#rate-form{
+    width: 32%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+}
+#rate-form input[type="text"]{
     padding: 10px 20px;
     border: none;
+    border-radius: 10px 0px 0px 10px;
+}
+#rate-form input[type="submit"]{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+}
+.chosen{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.827);
+}
+#visible-rate{
+    min-height: 30vh;
+    width: 100vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: vollkorn;
+}
+.message{
+    position: relative;
+    background-color: white;
+    min-width: 100px;
+    min-height: 30px;
+    max-width: 93%;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 15px 0 20px 50px;
+    padding: 10px 0;
+}
+.message p{
+    padding:  0 10px;
+}
+.avt{
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    border: 5px solid #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+.star-container{
+    filter: brightness(160%);
+    width: 100px;
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    font-size: 15px;
+}
+#inputfile {
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+#inputfile + label {
+    cursor: pointer;
+    display: inline-block;
+}
+.preview-img{
+    margin: 10px 0 0 5px;
+    max-width: 100px;
+}
+#rate-img-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.img-rate-container{
+    position: relative;
+    margin: -10px 0 0 55px;
+}
+.img-rate-container img{
+    padding: 0px 5px 10px 0;
+    max-width: 100px;
 }

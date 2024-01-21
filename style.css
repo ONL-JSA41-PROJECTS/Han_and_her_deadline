@@ -113,7 +113,7 @@ body{
     filter: grayscale(100%);
 }
 #bottom{
-    bottom: 100px;
+    bottom: 40px;
     left: 70px;
 }
 #top{
@@ -122,12 +122,11 @@ body{
     right: 130px;
 }
 #login_signup{
-    width: 200px;
+    width: 290px;
     z-index: 4;
     display: flex;
     align-items: center;
-    position: fixed;
-    margin: 52vh 0 0 87vw;
+    margin: 45vh 0 0 75vw;
     cursor: pointer;
     font-family: medio;
     font-weight: bold;
@@ -187,4 +186,14 @@ hr{
     width: 70%;
     border: 3px solid black;
     margin-bottom: 30px;
+}
+#userAvt{
+    margin-left: 5px;
+    border-radius: 100px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #E2C799;
 }

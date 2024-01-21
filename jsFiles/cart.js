@@ -15,6 +15,9 @@ function createItemBlock(){
             review = {
                 name: item.name,
                 img: item.img,
+                describe: item.describe,
+                shop:item.shop,
+                shopImg: item.shopImg,
                 price: item.price,
                 quantity: item.quantity,
                 more: item.more
@@ -34,7 +37,7 @@ function createItemBlock(){
         info.appendChild(hr)
 
         let itemPrice = document.createElement("i")
-        itemPrice.innerHTML = "<br>" + item.price * 1000 + " vnđ"
+        itemPrice.innerHTML = "<br>" + addSpaceForPrice((item.price* 1000).toString()) + " vnđ"
         info.appendChild(itemPrice)
 
         let itemQuantity = document.createElement("p")
@@ -46,8 +49,10 @@ function createItemBlock(){
         x.innerHTML="x"
         x.addEventListener("click",function(){
             container.removeChild(block)
+            
             accountsList[index].cart.splice(accountsList[index].cart.indexOf(item),1)
             account.cart.splice(account.cart.indexOf(item),1)
+
             localStorage.setItem("userAccounts",JSON.stringify(accountsList))
             localStorage.setItem("currentAccount",JSON.stringify(account))
         })
@@ -63,3 +68,16 @@ function createItemBlock(){
     }
 }
 createItemBlock()
+
+
+function addSpaceForPrice(str){
+    let newstr = ""
+
+    while (str.length>3){
+        newstr = "." + str.slice(-3) + newstr 
+        str = str.slice(0,-3)
+    }
+    newstr = str + newstr
+
+    return newstr
+}

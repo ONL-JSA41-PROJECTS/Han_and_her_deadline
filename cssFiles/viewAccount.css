@@ -1,0 +1,263 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+#setting-info {
+    display: flex;
+    width: 60vw;
+    height: 92vh;
+    margin: 4vh auto;
+}
+
+#avt {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+#avt img {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 5px solid rgba(234, 234, 234, 0.535);
+}
+
+#edit-avt {
+    display: none;
+    position: absolute;
+    z-index: -1;
+}
+
+#edit-avt-btn {
+    cursor: pointer;
+    color: white;
+    font-size: 70px;
+    opacity: 0;
+    position: fixed;
+    margin: -190px 0 0 -30px;
+
+}
+
+#edit-avt-btn:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px black);
+}
+
+#edit-avt-btn:hover #avt img {
+    filter: brightness(70%);
+}
+
+#tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    list-style-type: none;
+    border-radius: 20px;
+    font-family: vollkorn;
+}
+
+#tab a {
+    color: black;
+}
+
+#tab li {
+    width: 95%;
+    background-color: #fffce6;
+    cursor: pointer;
+    text-align: center;
+    padding: 20px 0;
+    margin: 5px 0;
+    border-radius: 20px;
+}
+
+#tab li:hover {
+    background-color: #e9e4be;
+}
+
+#text-info {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.personal-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    width: 80%;
+    color: white;
+    font-family: vollkorn;
+}
+
+.personal-info-container p {
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+
+.personal-info-container p span {
+    cursor: pointer;
+}
+
+.login-page-link-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: blue;
+}
+
+#change-info-tab {
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 18vh;
+    position: absolute;
+    filter: drop-shadow(0 0 80px rgba(0, 0, 0, 0.805));
+    margin: 40vh 0 0 40vw;
+}
+
+#change-info-tab form p {
+    font-family: medio;
+    font-weight: bold;
+}
+
+#change-info-tab form input {
+    border-radius: 10px;
+    padding: 10px 0;
+    border: 3px solid rgb(96, 96, 96);
+}
+
+#change-info-tab form p span {
+    cursor: pointer;
+    font-family: merchant;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+}
+
+.change-pass-btn {
+    cursor: pointer;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+#custom-alert {
+    text-align: center;
+    display: none;
+    font-family: vollkorn;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    min-height: 60px;
+    background-color: white;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.623));
+}
+
+.account-display-load {
+    margin: 10px 0;
+    cursor: pointer;
+    width: 70%;
+    height: 10%;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.account-display-load:hover {
+    width: 73%;
+}
+
+.unselected {
+    border: 3px solid #e9e4be;
+    color: black;
+}
+
+.create-shop-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+}
+
+.create-shop-form input,
+textarea {
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.create-shop-form img {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 3px solid white;
+}
+
+#shops-list {
+    margin: 60px 0 0 30px;
+    width: 90%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: auto auto;
+    overflow-y: auto;
+}
+
+.shop-container {
+    position: relative;
+    cursor: pointer;
+    font-family: merchant;
+    font-size: 30px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shop-container p {
+    max-height: 20%;
+    max-width: 100%;
+    color: white;
+    padding-bottom: 5px;
+}
+
+.shop-container img {
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
+    width: 80%;
+    height: 60%;
+    object-fit: cover;
+}
